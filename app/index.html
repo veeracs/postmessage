@@ -42,6 +42,8 @@
         // document.getElementById('message').innerHTML = JSON.parse(e.data);
         // IE9+ 
         console.dir(JSON.parse(e.data));
+        $('#myModal').modal('hide');
+        $('#signIn').text('Logout');
       },false);
     </script>
   </body>
