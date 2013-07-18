@@ -1,0 +1,87 @@
+<style>
+.modal {
+	border-radius: 0;
+}
+.modal-body {
+	position: relative;
+	min-height:450px;
+	padding: 0;
+}
+.signInIframe {
+	height:100%;
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	bottom:0px; 
+	margin: 0 auto; 
+	display:inline;
+}
+
+.btn {
+	z-index: -1;
+}
+
+button.close {
+	z-index: 999;
+	position: absolute;
+	top: 15px;
+	right: 20px;
+	color: #fff;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+	font-weight: 100;
+	font-size: 24px;
+}
+.close:hover,
+.close:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+
+.launch {
+	position: absolute;
+	left: 0px;
+}
+.glamour {
+	z-index: -1;
+}
+
+.ios-scroll {
+	-ms-overflow-y: auto;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+
+@media all and (min-width: 320px) and (max-width: 640px) {
+	.modal-body {
+		width: 100%;
+	}
+	button.close {
+		z-index: 999;
+	}
+}
+
+@media (max-width: 767px) {
+.modal.fade.in {
+	top: 0;
+	left:0;
+	right:0;
+}
+}
+</style>
+
+<a href="#myModal" role="button" class="btn launch" data-toggle="modal">Sign In/Register</a>
+<!--iframe src="http://glamour.com" class="signInIframe glamour" frameborder="0" height="100%" width="100%"></iframe-->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-body ios-scroll">
+  		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    	<iframe src="http://10.0.1.15:9001/src/#/com.condenet.brides/login" class="signInIframe" frameborder="0" marginheight="0" marginwidth="0" height="100%" width="100%"></iframe>
+  </div>
+</div>
