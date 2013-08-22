@@ -93,8 +93,9 @@ button.close {
 
 <a id="signIn" href="#myModal" role="button" class="btn launch" data-toggle="modal">Sign In/Register</a>
 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-body ios-scroll">
+  <div class="modal-body ios-scroll" style="overflow-y:visible">
   		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    	<iframe src="http://localhost:9001/#/com.condenet.brides/login" class="signInIframe" frameborder="0" marginheight="0" marginwidth="0" height="100%" width="100%"></iframe>
+    	<!--[if IE 8]><iframe style="margin-top:-37px;margin-left:-17px" src="http://10.206.54.40:9001/#/com.condenet.brides/login" class="signInIframe" frameborder="0" marginheight="0" marginwidth="0" height="620" width="600"></iframe> <![endif]-->
+		<!--[if (gt IE 8)|!(IE)]><!--> <iframe src="http://localhost:9001/#/com.condenet.brides/login" class="signInIframe" frameborder="0" marginheight="0" marginwidth="0" height="100%" width="100%"></iframe><!--<![endif]-->
   </div>
 </div>
