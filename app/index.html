@@ -37,11 +37,11 @@
           messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
       // Listen to message from child window
       eventer(messageEvent,function(e) {
-        // alert(e.data);
+        //  alert(e.data);
         //  IE8 and below
-        // document.getElementById('message').innerHTML = JSON.parse(e.data);
-        // IE9+ 
-        // console.dir(JSON.parse(e.data));
+        //  document.getElementById('message').innerHTML = JSON.parse(e.data);
+        //  IE9+ 
+        console.dir(JSON.parse(e.data));
         $('#myModal').modal('hide');
         $('#signIn').text('Logout');
       },false);
