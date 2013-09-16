@@ -42,8 +42,16 @@
         //  document.getElementById('message').innerHTML = JSON.parse(e.data);
         //  IE9+ 
         console.dir(JSON.parse(e.data));
-        $('#myModal').modal('hide');
-        $('#signIn').text('Logout');
+        var data = JSON.parse(e.data);
+        if (data.scrollTop) {
+          console.log("scroll to top");
+          $("#frameContainer").animate({
+            scrollTop: 0 // scrolls to the bottom
+          }, 100);
+        } else {
+          $('#myModal').modal('hide');
+          $('#signIn').text('Logout');  
+        }
       },false);
     </script>
   </body>
