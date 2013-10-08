@@ -9,32 +9,69 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://ci-cnid.conde.io/client/css/main.css">
+    <style>
+      .container-fluid {
+        margin: 0 30px;
+        padding-bottom: 10px;
+        top: 0;
+      }
+      select {
+        width: 100px;
+      }
+      a.lnk-conde {
+        padding-left: 20px;
+        text-decoration: underline;
+      }
+    </style>
     <!--[if lt IE 9]>
-      <script src="components/es5-shim/es5-shim.js"></script>
-      <script src="components/json2/json2.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/bootstrap.css">
   </head>
 <body>
-<div class="row-fluid">
-  <div class="span12">
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id quaerat sit blanditiis totam recusandae. Mollitia, sit, officia, quaerat esse obcaecati eaque cum itaque voluptatum pariatur corporis enim hic aut optio.
-    <div class="row-fluid">
-      <div class="span6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, similique, amet, dolorum, labore totam iure quam distinctio ducimus aperiam illo debitis praesentium et commodi voluptates id autem nulla delectus est.
-        <div class="row-fluid">
-          <div class="span6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, et, officiis eius necessitatibus asperiores dicta quis amet similique cum fugit laboriosam odit neque nemo recusandae doloribus accusamus laborum cumque a.</div>
-          <div class="span6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, eligendi, at repellendus vel alias sunt commodi tenetur doloremque minima dignissimos quod consequuntur nulla eos mollitia atque in doloribus error cumque.</div>
+
+<div class="container-fluid">
+  <form name="ccUpsellForm">
+    <div class="span12 subunit bottom-shadow subunit-shadow">
+      <div class="mag-offer clearfix">
+        <img class="mag-cover" src="https://subscribe.condenet.com/images_covers/cover_glamour_100.jpg" alt="magazine cover">
+        <p>Thank you for your order! Pay now to take adavantage of this offer orem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      </div>
+      <div class="row-fluid">
+        <div class="span9 offset3">
+          <div class="row-fluid">
+            <div class="control-group">
+              <label for="">Credit Card Number</label>
+              <input name="creditcardNumber" type="text" class="input-block-level" id="creditCardNumber" placeholder="Credit Card Number*">
+              <div class="alert alert-error form-alert cn-alert-error"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="control-group">
+              <label for="">Expiration Date</label>
+              <div class="row-fluid">
+                <div class="span12">
+                  <select class="mm" name="credit_card_exp_month">
+                    <option value="01">1</option><option value="02">2</option><option value="03">3</option><option value="04">4</option><option value="05">5</option><option value="06">6</option><option value="07">7</option><option value="08">8</option><option value="09">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+                  </select>
+                  <select class="yy" name="credit_card_exp_year">
+                    <option value="13">2013</option><option value="14">2014</option><option value="15">2015</option><option value="16">2016</option><option value="17">2017</option><option value="18">2018</option><option value="19">2019</option><option value="20">2020</option><option value="21">2021</option><option value="22">2022</option><option value="23">2023</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="control-group">
+              <button type="submit" class="btn btn-form btn-conde">Submit</button>
+              <a class="lnk-conde" href="#">Bill me later</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="span6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, dolor, debitis obcaecati ipsum officia quia odio aliquam maxime neque error quas suscipit laboriosam rem deleniti animi consectetur tenetur alias odit!</div>
     </div>
-    <p><a id="billMeLater" href="#" class="btn">Bill Me Later</a> <a id="submitPayment" href="#" class="btn">Submit</a></p>
-  </div>
+  </form>
 </div>
-<script src="components/jquery/jquery.min.js"></script>
-<script src="components/bootstrap/js/modal.js"></script>
-<script src="scripts/main.js"></script>
 </body>
 </html>
