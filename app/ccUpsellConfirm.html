@@ -9,28 +9,67 @@
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="http://ci-cnid.conde.io/client/css/main.css">
+    <style>
+      .container-fluid {
+        margin: 0 30px;
+        padding-bottom: 10px;
+        top: 0;
+      }
+      .table th, .table td {
+        text-align: right;
+      }
+      @media only screen and (min-width : 310px) and (max-width : 511px) {
+        .container-fluid {
+          margin: 0 10px;
+          padding-bottom: 0px;
+          top: 0;
+        }
+      }
+    </style>
     <!--[if lt IE 9]>
-      <script src="components/es5-shim/es5-shim.js"></script>
-      <script src="components/json2/json2.js"></script>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="http://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/bootstrap.css">
   </head>
 <body>
-<div class="row-fluid">
-  <div class="span12">
-    <h2>Confirmation page!</h2>
-    <div class="row-fluid">
-      <div class="span6">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, similique, amet, dolorum, labore totam iure quam distinctio ducimus aperiam illo debitis praesentium et commodi voluptates id autem nulla delectus est.
-        <div class="row-fluid">
-          <div class="span6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum, et, officiis eius necessitatibus asperiores dicta quis amet similique cum fugit laboriosam odit neque nemo recusandae doloribus accusamus laborum cumque a.</div>
-          <div class="span6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, eligendi, at repellendus vel alias sunt commodi tenetur doloremque minima dignissimos quod consequuntur nulla eos mollitia atque in doloribus error cumque.</div>
-        </div>
+
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <h4>Thank you for your purchase</h4>
+      <p>Any new print subscriptions will be to arrive in 4 to 6 weeks. If you selected digital access as part of your subscription, you can access it on your tablet immediately!</p>
+      <h5>Order Details</h5>
+      <table class="table table-bordered">
+        <tr>
+          <td><b>Subtotal:</b></td>
+          <td>$34.00</td>
+        </tr>
+        <tr>
+          <td><b>Sales tax:</b></td>
+          <td>$3.34</td>
+        </tr>
+        <tr>
+          <td><b>Total purchase:</b></td>
+          <td>$37.34</td>
+        </tr>
+        <tr>
+          <td><b>Payment method:</b></td>
+          <td>Credit</td>
+        </tr>
+      </table>
+      <div class="control-group">
+        <a id="continue" class="btn btn-form btn-conde">Continue</a>
       </div>
-      <div class="span6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem, dolor, debitis obcaecati ipsum officia quia odio aliquam maxime neque error quas suscipit laboriosam rem deleniti animi consectetur tenetur alias odit!</div>
+      <div class="legal">
+        <p>Customer Service can be reached at www..com/customerservice or 1-800-405-8085.</p>
+        <p>Subscribers: If the Post Office alerts us that your magazine is undeliverable, we have no further obligation unless we receive a corrected address within one year. All orders subject to approval. By ordering, you agree not to resell any subscriptions purchased from this site.</p>
+        <p>Plus sales tax where applicable.</p>
+        <p>To learn more about our information practices and your privacy rights, click here</p>
+        <p>Use of this site constitutes acceptance of our User Agreement and Privacy Policy. Your CA Privacy Rights</p>
+        <p>Copyright © 2013 Condé Nast. All rights reserved</p>
+      </div>
     </div>
-    <p><a id="finish" href="#" class="btn">Finish</a></p>
   </div>
 </div>
 <script src="components/jquery/jquery.min.js"></script>

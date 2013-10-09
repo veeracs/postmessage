@@ -1,7 +1,7 @@
 (function(){
 	var requestPayload = {next: true};
 	$('#submitPayment').on('click', function(){
-		//	always set the domain value
+		//	send the domain as query param
 		window.location = 'http://ist-cveera-6065:5000/ccUpsellConfirm.html?domain=http://IST-cveera-6065:9001/';
 	});
 
@@ -10,7 +10,7 @@
 		parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
 	});
 
-	$('#finish').on('click', function(){
+	$('#continue').on('click', function(){
 		//	post message to navigate to next view in the parent
 		parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
 	});
