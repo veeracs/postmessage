@@ -3,10 +3,12 @@
 	$('#submitPayment').on('click', function(){
 		//	send the domain as query param
 		window.location = 'http://ist-cveera-6065:5000/ccUpsellConfirm.html?domain=http://IST-cveera-6065:9001/';
+		//onClick="getElementById('previous_page').value = 'CCUPSELLACCEPT';if(validateForm(this.form)){this.style.display = 'none';getElementById('standby').style.display = 'block';}else{return false;}"
 	});
 
 	$('#billMeLater').on('click', function(){
 		//	post message to navigate to next view in the parent
+		//onClick="getElementById('previous_page').value = 'CCUPSELLDECLINE'; " id="decline"
 		parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
 	});
 

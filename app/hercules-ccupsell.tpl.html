@@ -1,0 +1,365 @@
+<!-- saved from url=(0066)file:///C:/Documents%20and%20Settings/tglore/Desktop/cnidfile.html -->
+<!DOCTYPE html>
+
+<html>
+<head>
+<TMPL_INCLUDE NAME="omnitureobject.tmpl">
+	<title><TMPL_IF TITLE><TMPL_VAR NAME="TITLE"><TMPL_ELSE><TMPL_VAR NAME="SITE_NAME"></TMPL_IF></title>
+	<META NAME="description" CONTENT="<TMPL_VAR NAME="META_DESCRIPTION">">
+	<META NAME="keywords" CONTENT="<TMPL_VAR NAME="META_KEYWORDS">">
+
+<script type="text/javascript">
+
+
+
+     jQuery(document).ready(function ($) {
+
+
+			function getUrlVars()
+			{
+				var vars = [], hash;
+				var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+				for(var i = 0; i < hashes.length; i++)
+				{
+					hash = hashes[i].split('=');
+					vars.push(hash[0]);
+					vars[hash[0]] = hash[1];
+				}
+				return vars;
+			}
+			
+			validateForm = function () {
+					$('#btn_submit').hide(); 
+				$('#btn_processing').show();
+
+if ($('input[type=radio]').length > 0) {
+
+				
+				if ($('input[type=radio]:checked').length == 0) {
+alert("Please select credit card type.");
+					$('#btn_submit').show();
+					$('#btn_processing').hide();
+					return false;
+
+				}
+}
+
+if ($('select').length == 3){
+
+
+if ($('select[name=pt_id]').attr("selectedIndex") == 0) {
+alert("Please select credit card type.");
+					$('#btn_submit').show();
+					$('#btn_processing').hide();
+					return false;
+
+				}
+
+}
+
+      return true;
+
+                               };
+
+
+
+
+
+});
+
+
+</script>
+
+<script type="text/javascript">jQuery.noConflict();</script> 
+
+	<TMPL_INCLUDE NAME="conde_scripts.tmpl">
+
+</head>
+
+<body>
+
+<form action="/subscribe/processSubscription" method="post" onSubmit="return validateFrm(this);" class="validate">
+
+    <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
+<TMPL_IF EXPR="host_ind >=1">
+    <input type="hidden" name="offer_id" value="<TMPL_VAR NAME="OFFER_ID">">
+    <input type=hidden name="trans_key" value="<TMPL_VAR NAME="TRANS_KEY">">
+    <TMPL_LOOP NAME="UPSELLS">
+        <input type="hidden" name="offer_term" value="<TMPL_VAR NAME="OFFER_TERM_ID">">
+    </TMPL_LOOP>
+<TMPL_ELSE>
+<!-- V1 needs the offer_id of the upsell itself -->
+    <TMPL_LOOP NAME="UPSELLS">
+    <input type="hidden" name="offer_id" value="<TMPL_VAR NAME="OFFER_ID">">
+    <input type="hidden" name="offer_term" value="<TMPL_VAR NAME="OFFER_TERM">">
+    </TMPL_LOOP>
+</TMPL_IF>
+<input type="hidden" name="host_offer_id" value="<TMPL_VAR NAME="HOST_OFFER_ID">">
+	<input type="hidden" name="referral_source" value="<TMPL_VAR NAME="SOURCE">" />
+    <input type="hidden" name="previous_page" value="<TMPL_VAR NAME="PREVIOUS_PAGE">" id="previous_page">
+    <input type="hidden" name="parent_trans_id" value="<TMPL_VAR NAME="TRANS1_TRANS_ID">">
+    <input type="hidden" name="source_code" value="<TMPL_VAR NAME="SOURCE_CODE">">
+    <input type="hidden" name="first_name" value="<TMPL_VAR NAME="TRANS1_FIRST_NAME">">
+    <input type="hidden" name="last_name" value="<TMPL_VAR NAME="TRANS1_LAST_NAME">">
+    <input type="hidden" name="address" value="<TMPL_VAR NAME="TRANS1_ADDRESS">">
+    <input type="hidden" name="address2" value="<TMPL_VAR NAME="TRANS1_ADDRESS2">">
+    <input type="hidden" name="city" value="<TMPL_VAR NAME="TRANS1_CITY">">
+    <input type="hidden" name="state" value="<TMPL_VAR NAME="TRANS1_STATE">">
+    <input type="hidden" name="postal_code" value="<TMPL_VAR NAME="TRANS1_POSTAL_CODE">">
+    <input type="hidden" name="country_code" value="<TMPL_VAR NAME="TRANS1_COUNTRY_CODE">">
+    <input type="hidden" name="email" value="<TMPL_VAR NAME="TRANS1_EMAIL">">
+    <input type="hidden" name="ship_first_name" value="<TMPL_VAR NAME="TRANS1_SHIP_FIRST_NAME">">
+    <input type="hidden" name="ship_last_name" value="<TMPL_VAR NAME="TRANS1_SHIP_LAST_NAME">">
+    <input type="hidden" name="ship_address" value="<TMPL_VAR NAME="TRANS1_SHIP_ADDRESS">">
+    <input type="hidden" name="ship_address2" value="<TMPL_VAR NAME="TRANS1_SHIP_ADDRESS2">">
+    <input type="hidden" name="ship_city" value="<TMPL_VAR NAME="TRANS1_SHIP_CITY">">
+    <input type="hidden" name="ship_state" value="<TMPL_VAR NAME="TRANS1_SHIP_STATE">">
+    <input type="hidden" name="ship_postal_code" value="<TMPL_VAR NAME="TRANS1_SHIP_POSTAL_CODE">">
+    <input type="hidden" name="ship_country_code" value="<TMPL_VAR NAME="TRANS1_SHIP_COUNTRY_CODE">">
+    <input type="hidden" name="ship_email" value="<TMPL_VAR NAME="TRANS1_SHIP_EMAIL">">
+    <input type="hidden" name="general_optin" value="<TMPL_VAR NAME="TRANS1_GENERAL_OPTIN">">
+    <input type="hidden" name="secondary_optin" value="<TMPL_VAR NAME="TRANS1_SECONDARY_OPTIN">">
+    <input type="hidden" name="edialog_list_id" value="<TMPL_VAR NAME="EDIALOG_LIST_ID">">
+    <input type="hidden" name="se_id" value="<TMPL_VAR NAME="SE_ID">">
+    <input type="hidden" name="ur_id" value="<TMPL_VAR NAME="UR_ID">">
+    <input type="hidden" name="user_name" value="<TMPL_VAR NAME="USER_NAME">">
+    <input type="hidden" name="password" value="<TMPL_VAR NAME="PASSWORD">">
+    <input type="hidden" name="pos_name" value="<TMPL_VAR NAME="POS_NAME">" />
+    <input type="hidden" name="segment_name" value="<TMPL_VAR NAME="CRITERIA_NAME">" />
+<TMPL_LOOP NAME="UPSELL_PREMIUMS">
+<input type="hidden" name="premium_id" value="<TMPL_VAR NAME="PREMIUM_ID">">
+</TMPL_LOOP>
+
+    <div>
+        <div style="height:0px;width:0px;">
+            <div style="background-color:#f2f9ff;width:320px;height:550px;">
+            </div>
+        </div>
+
+        <div style="height:0px;width:0px;">
+            <div style=
+            "position:relative;width:320px;height:40px;background-color:black;">
+            <div style="height:0px;width:0px;"><img src=
+            "https://subscribe.condenastdigital.com/circulation/brides/images/thktext.gif" style=
+            "position:relative;top:0px;"><img src=
+            "https://subscribe.condenastdigital.com/circulation/brides/images/thnkclose.gif" style=
+            "position:relative;top:-45px;left:280px;"></div>
+            </div>
+        </div>
+
+        <div style="height:0px;width:0px;">
+            <div style=
+            "position:relative;width:320px;height:40px;top:60px;left:20px;">
+            <img src="https://subscribe.condenastdigital.com/circulation/brides/images/cover_brides_146.jpg" width=
+            "122px"></div>
+        </div>
+
+        <div style="height:0px;width:0px;">
+            <div style=
+            "position:relative;width:140px;height:100px;top:60px;left:160px;font-size:14px;font-family:arial;">
+            Thank you for your order! Pay now to take advantage of this offer
+            lorem ipsum dolor sit amet consectetur adipsing lit. Curabitur port
+            aliguam pretium.
+            </div>
+        </div>
+
+        <div style="height:0px;width:0px;">
+            <div style=
+            "position:relative;width:320px;height:40px;top:230px;left:-40px;">
+                <div id="billingOptions" style="font-size:12px;">
+                    <fieldset class="mod-billing" style="border:none;">
+                        <ul id="payment" style=
+                        "list-style:none;font-family:arial;">
+                            <li class="row pay-method"><label style=
+                            "margin-right:25px;">Payment Method:</label>
+                            <select class="payTypeSel" name="pt_id">
+                                <option value="">
+                                    please select
+                                </option>
+
+                                <option value="1">
+                                    MasterCard
+                                </option>
+
+                                <option value="2">
+                                    Visa
+                                </option>
+
+                                <option value="3">
+                                    American Express
+                                </option>
+
+                                <option value="5">
+                                    Discover
+                                </option>
+                            </select></li>
+
+                            <li class="row optnl ccrow rqrd">
+                                <label style="margin-right:7px;">Credit Card
+                                Number:</label><input class="ccnumb" id=
+                                "credit_card_number" maxlength="24" name=
+                                "credit_card_number" type="text">
+
+                                <div class="info-pop paymeth" id="infoPopcc"
+                                style="display: none;">
+                                    <div class="inner">
+                                        <p>Please select a payment method,
+                                        above</p>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="row optnl ed rqrd">
+                            <!--<label>Exp. Date (mm/yy):</label> <input class="mm" type="text" id="credit_card_exp_month" name="credit_card_exp_month" maxlength="2" /><span>/</span><input class="yy" type="text" id="credit_card_exp_year" name="credit_card_exp_year" maxlength="2" /> -->
+                            <label style="margin-right:33px;">Expiration
+                            Date:</label> <select class="mm" name=
+                            "credit_card_exp_month">
+                                <option value="01">
+                                    1
+                                </option>
+
+                                <option value="02">
+                                    2
+                                </option>
+
+                                <option value="03">
+                                    3
+                                </option>
+
+                                <option value="04">
+                                    4
+                                </option>
+
+                                <option value="05">
+                                    5
+                                </option>
+
+                                <option value="06">
+                                    6
+                                </option>
+
+                                <option value="07">
+                                    7
+                                </option>
+
+                                <option value="08">
+                                    8
+                                </option>
+
+                                <option value="09">
+                                    9
+                                </option>
+
+                                <option value="10">
+                                    10
+                                </option>
+
+                                <option value="11">
+                                    11
+                                </option>
+
+                                <option value="12">
+                                    12
+                                </option>
+                            </select> <select class="yy" name=
+                            "credit_card_exp_year">
+                                <option value="13">
+                                    2013
+                                </option>
+
+                                <option value="14">
+                                    2014
+                                </option>
+
+                                <option value="15">
+                                    2015
+                                </option>
+
+                                <option value="16">
+                                    2016
+                                </option>
+
+                                <option value="17">
+                                    2017
+                                </option>
+
+                                <option value="18">
+                                    2018
+                                </option>
+
+                                <option value="19">
+                                    2019
+                                </option>
+
+                                <option value="20">
+                                    2020
+                                </option>
+
+                                <option value="21">
+                                    2021
+                                </option>
+
+                                <option value="22">
+                                    2022
+                                </option>
+
+                                <option value="23">
+                                    2023
+                                </option>
+                            </select></li>
+
+                            <li style="list-style: none"><img src=
+                            "https://subscribe.condenastdigital.com/circulation/brides/images/cc-lock-striptk.gif" style=
+                            "margin-left:-12px;margin-top:5px;"></li>
+                        </ul>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+
+        <div style="width:0px;height:0px;">
+            <div style="position:relative;top:370px;left:70px;"><div class="buttons">
+				<input type="image" name="offer_accept" value="CCUPSELLACCEPT"  id="accept" onClick="getElementById('previous_page').value = 'CCUPSELLACCEPT';if(validateForm(this.form)){this.style.display = 'none';getElementById('standby').style.display = 'block';}else{return false;}" src="https://subscribe.condenastdigital.com/circulation/brides/images/4specssubmit.gif" border="0px" /><img src="/circulation/shared/images/omn_processing.gif" id="standby" border="0px" style="display:none;" />
+			
+			</div>
+		
+        </div>
+
+        <div style="width:0px;height:0px;">
+            <div style="position:relative;top:420px;left:115px;width:120px;">
+                <a href=
+                "file:///C:/Documents%20and%20Settings/tglore/Desktop/test1"
+                style="width:100px;" onClick="getElementById('previous_page').value = 'CCUPSELLDECLINE'; " id="decline">Bill me later</a></form>
+            </div>
+        </div>
+
+        <div style="width:0px;height:0px;">
+            <div style=
+            "position:relative;top:420px;left:0px;width:120px;height:300px;width:320px;background-color:white;">
+            <img src="https://subscribe.condenastdigital.com/circulation/brides/images/glmbottomborderd.jpg" style=
+            "margin-left:0px;"></div>
+        </div>
+
+        <div style="width:0px;height:0px;">
+            <div style="position:relative;top:430px;left:5px;width:300px;">
+                <br>
+                <b style="font-family:arial;font-size:12px;">Subscriber's
+                Automatic Renewal Feature:</b><br>
+                <span style="font-family:arial;font-size:12px;">Your
+                subscription will be automatically renewed unless you tell us
+                to stop. Before the start of each renewal, you will be sent a
+                reminder notice stating the term and rate then in effect. If
+                you do nothing, your credit/debit card will be charged or you
+                will be sent an invoice for your subscription. You may cancel
+                at any time during your subscription and receive a full refund
+                for unmailed issues.</span>
+            </div>
+        </div>
+
+        <div style="width:0px;height:0px;">
+            <div style="position:relative;top:620px;left:0px;width:300px;"><br>
+            <img src="https://subscribe.condenastdigital.com/circulation/brides/images/4specfooterdd.gif"></div>
+        </div>
+    </div>
+</body>
+</html>

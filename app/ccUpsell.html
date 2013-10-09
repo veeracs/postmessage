@@ -4,10 +4,12 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
+    <TMPL_INCLUDE NAME="omnitureobject.tmpl">
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title></title>
-    <meta name="description" content="">
+    <title><TMPL_IF TITLE><TMPL_VAR NAME="TITLE"><TMPL_ELSE><TMPL_VAR NAME="SITE_NAME"></TMPL_IF></title>
+    <meta name="description" content="<TMPL_VAR NAME='META_DESCRIPTION'>">
+    <meta name="keywords" content="<TMPL_VAR NAME='META_KEYWORDS'>">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="http://ci-cnid.conde.io/client/css/main.css">
     <style>
@@ -47,6 +49,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <script src="http://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
+    <TMPL_INCLUDE NAME="conde_scripts.tmpl">
   </head>
 <body>
 
@@ -54,7 +57,56 @@
   <div class="row-fluid span12">
     <div class="alert alert-error server-error cn-server-error">Invalid entry, please try again.</div>
   </div>
-  <form name="ccUpsellForm">
+  <form action="/subscribe/processSubscription" method="post" onSubmit="return validateFrm(this);" class="validate">
+    <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
+    <TMPL_IF EXPR="host_ind >=1">
+      <input type="hidden" name="offer_id" value="<TMPL_VAR NAME='OFFER_ID'>">
+      <input type=hidden name="trans_key" value="<TMPL_VAR NAME='TRANS_KEY'>">
+      <TMPL_LOOP NAME="UPSELLS">
+          <input type="hidden" name="offer_term" value="<TMPL_VAR NAME='OFFER_TERM_ID'>">
+      </TMPL_LOOP>
+    <TMPL_ELSE>
+      <!-- V1 needs the offer_id of the upsell itself -->
+      <TMPL_LOOP NAME="UPSELLS">
+        <input type="hidden" name="offer_id" value="<TMPL_VAR NAME='OFFER_ID'>">
+        <input type="hidden" name="offer_term" value="<TMPL_VAR NAME='OFFER_TERM'>">
+      </TMPL_LOOP>
+    </TMPL_IF>
+    <input type="hidden" name="host_offer_id" value="<TMPL_VAR NAME='HOST_OFFER_ID'>">
+    <input type="hidden" name="referral_source" value="<TMPL_VAR NAME='SOURCE'>" />
+    <input type="hidden" name="previous_page" value="<TMPL_VAR NAME='PREVIOUS_PAGE'>" id="previous_page">
+    <input type="hidden" name="parent_trans_id" value="<TMPL_VAR NAME='TRANS1_TRANS_ID'>">
+    <input type="hidden" name="source_code" value="<TMPL_VAR NAME='SOURCE_CODE'>">
+    <input type="hidden" name="first_name" value="<TMPL_VAR NAME='TRANS1_FIRST_NAME'>">
+    <input type="hidden" name="last_name" value="<TMPL_VAR NAME='TRANS1_LAST_NAME'>">
+    <input type="hidden" name="address" value="<TMPL_VAR NAME='TRANS1_ADDRESS'>">
+    <input type="hidden" name="address2" value="<TMPL_VAR NAME='TRANS1_ADDRESS2'>">
+    <input type="hidden" name="city" value="<TMPL_VAR NAME='TRANS1_CITY'>">
+    <input type="hidden" name="state" value="<TMPL_VAR NAME='TRANS1_STATE'>">
+    <input type="hidden" name="postal_code" value="<TMPL_VAR NAME='TRANS1_POSTAL_CODE'>">
+    <input type="hidden" name="country_code" value="<TMPL_VAR NAME='TRANS1_COUNTRY_CODE'>">
+    <input type="hidden" name="email" value="<TMPL_VAR NAME='TRANS1_EMAIL'>">
+    <input type="hidden" name="ship_first_name" value="<TMPL_VAR NAME='TRANS1_SHIP_FIRST_NAME'>">
+    <input type="hidden" name="ship_last_name" value="<TMPL_VAR NAME='TRANS1_SHIP_LAST_NAME'>">
+    <input type="hidden" name="ship_address" value="<TMPL_VAR NAME='TRANS1_SHIP_ADDRESS'>">
+    <input type="hidden" name="ship_address2" value="<TMPL_VAR NAME='TRANS1_SHIP_ADDRESS2'>">
+    <input type="hidden" name="ship_city" value="<TMPL_VAR NAME='TRANS1_SHIP_CITY'>">
+    <input type="hidden" name="ship_state" value="<TMPL_VAR NAME='TRANS1_SHIP_STATE'>">
+    <input type="hidden" name="ship_postal_code" value="<TMPL_VAR NAME='TRANS1_SHIP_POSTAL_CODE'>">
+    <input type="hidden" name="ship_country_code" value="<TMPL_VAR NAME='TRANS1_SHIP_COUNTRY_CODE'>">
+    <input type="hidden" name="ship_email" value="<TMPL_VAR NAME='TRANS1_SHIP_EMAIL'>">
+    <input type="hidden" name="general_optin" value="<TMPL_VAR NAME='TRANS1_GENERAL_OPTIN'>">
+    <input type="hidden" name="secondary_optin" value="<TMPL_VAR NAME='TRANS1_SECONDARY_OPTIN'>">
+    <input type="hidden" name="edialog_list_id" value="<TMPL_VAR NAME='EDIALOG_LIST_ID'>">
+    <input type="hidden" name="se_id" value="<TMPL_VAR NAME='SE_ID'>">
+    <input type="hidden" name="ur_id" value="<TMPL_VAR NAME='UR_ID'>">
+    <input type="hidden" name="user_name" value="<TMPL_VAR NAME='USER_NAME'>">
+    <input type="hidden" name="password" value="<TMPL_VAR NAME='PASSWORD'>">
+    <input type="hidden" name="pos_name" value="<TMPL_VAR NAME='POS_NAME'>" />
+    <input type="hidden" name="segment_name" value="<TMPL_VAR NAME='CRITERIA_NAME'>" />
+    <TMPL_LOOP NAME="UPSELL_PREMIUMS">
+      <input type="hidden" name="premium_id" value="<TMPL_VAR NAME='PREMIUM_ID'>">
+    </TMPL_LOOP>
     <div class="span12 subunit bottom-shadow subunit-shadow">
       <p>Thank you for your order! Pay now to take adavantage of this offer orem ipsum dolor sit amet, consectetur adipisicing elit.</p>
       <div class="row-fluid">
@@ -68,26 +120,26 @@
                 <div class="control-group text-center radio-set">
                   <div class="span3 radio-unit">
                     <div><label for="visaCard"><img src="http://placehold.it/26x18" alt=""></label></div>
-                    <input id="visaCard" name="creditCard" type="radio" class="radio" value="visa">
+                    <input id="visaCard" name="pt_id" type="radio" class="radio" value="2">
                   </div>
                   <div class="span3 radio-unit">
                     <div><label for="masterCard"><img src="http://placehold.it/26x18" alt=""></label></div>
-                    <input id="masterCard" name="creditCard" type="radio" class="radio" value="master">
+                    <input id="masterCard" name="pt_id" type="radio" class="radio" value="1">
                   </div>
                   <div class="span3 radio-unit">
                     <div><label for="amexCard"><img src="http://placehold.it/26x18" alt=""></label></div>
-                    <input id="amexCard" name="creditCard" type="radio" class="radio" value="amex">
+                    <input id="amexCard" name="pt_id" type="radio" class="radio" value="3">
                   </div>
                   <div class="span3 radio-unit">
                     <div><label for="discoverCard"><img src="http://placehold.it/26x18" alt=""></label></div>
-                    <input id="discoverCard" name="creditCard" type="radio" class="radio" value="discover">
+                    <input id="discoverCard" name="pt_id" type="radio" class="radio" value="5">
                   </div>
                 </div>
               </div>
               <div class="row-fluid">
                 <div class="control-group">
                   <label for="">Credit Card Number</label>
-                  <input name="creditcardNumber" type="text" class="input-block-level" id="creditCardNumber" placeholder="Credit Card Number*">
+                  <input name="credit_card_number" type="text" class="ccnumb" id="credit_card_number" maxlength="24" placeholder="Credit Card Number*">
                   <div class="alert alert-error form-alert cn-alert-error"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
                 </div>
               </div>
@@ -109,6 +161,7 @@
               <div class="row-fluid">
                 <div class="control-group">
                   <a id="submitPayment" class="btn btn-form btn-conde">Submit</a>
+                  <img src="/circulation/shared/images/omn_processing.gif" id="standby" border="0px" style="display:none;">
                   <a id="billMeLater" class="lnk-conde" href="#">Bill me later</a>
                 </div>
               </div>
@@ -125,7 +178,6 @@
     </div>
   </form>
 </div>
-<script src="components/jquery/jquery.min.js"></script>
-<script src="scripts/main.js"></script>
+<script src="http://ci-cnid.conde.io/vendor/hearst.js"></script>
 </body>
 </html>
