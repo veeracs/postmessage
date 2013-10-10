@@ -28,44 +28,38 @@
 				return vars;
 			}
 			
-			validateForm = function () {
-					$('#btn_submit').hide(); 
-				$('#btn_processing').show();
+            validateForm = function () {
+                $('#btn_submit').hide();
+                $('#btn_processing').show();
 
-if ($('input[type=radio]').length > 0) {
-
-				
-				if ($('input[type=radio]:checked').length == 0) {
-alert("Please select credit card type.");
-					$('#btn_submit').show();
-					$('#btn_processing').hide();
-					return false;
-
-				}
-}
-
-if ($('select').length == 3){
+                if ($('input[type=radio]').length > 0) {
 
 
-if ($('select[name=pt_id]').attr("selectedIndex") == 0) {
-alert("Please select credit card type.");
-					$('#btn_submit').show();
-					$('#btn_processing').hide();
-					return false;
+                    if ($('input[type=radio]:checked').length == 0) {
+                        alert("Please select credit card type.");
+                        $('#btn_submit').show();
+                        $('#btn_processing').hide();
+                        return false;
 
-				}
+                    }
+                }
 
-}
-
-      return true;
-
-                               };
+                if ($('select').length == 3) {
 
 
+                    if ($('select[name=pt_id]').attr("selectedIndex") == 0) {
+                        alert("Please select credit card type.");
+                        $('#btn_submit').show();
+                        $('#btn_processing').hide();
+                        return false;
 
+                    }
 
+                }
 
-});
+                return true;
+
+            };
 
 
 </script>

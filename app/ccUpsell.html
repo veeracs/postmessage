@@ -55,7 +55,7 @@
 
 <div class="container-fluid">
   <div class="row-fluid span12">
-    <div class="alert alert-error server-error cn-server-error">Invalid entry, please try again.</div>
+    <div id="errorMessage" class="alert alert-error server-error cn-server-error hide">Invalid entry, please try again.</div>
   </div>
   <form action="/subscribe/processSubscription" method="post" onSubmit="return validateFrm(this);" class="validate">
     <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
@@ -140,7 +140,7 @@
                 <div class="control-group">
                   <label for="">Credit Card Number</label>
                   <input name="credit_card_number" type="text" class="ccnumb" id="credit_card_number" maxlength="24" placeholder="Credit Card Number*">
-                  <div class="alert alert-error form-alert cn-alert-error"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
+                  <div id="inline-error-credit" class="alert alert-error form-alert cn-alert-error"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
                 </div>
               </div>
               <div class="row-fluid">
@@ -179,6 +179,43 @@
   </form>
 </div>
 <TMPL_INCLUDE NAME="conde_scripts.tmpl">
-<script src="https://stag-cnid.condenastdigital.com/client/vendor/hearst.js"></script>
+<!--script src="https://stag-cnid.condenastdigital.com/client/vendor/hearst.js"></script-->
+<script>
+  (function(){
+  var requestPayload = {next: true};
+  $('#submitPayment').on('click', function(){
+    $("previous_page").val('CCUPSELLACCEPT');
+      $("form").submit(function(){
+        console.log("Submitted");
+      });
+    //  send the domain as query param
+    //  window.location = 'http://ist-cveera-6065:5000/ccUpsellConfirm.html?domain=http://IST-cveera-6065:9001/';
+    //onClick="getElementById('previous_page').value = 'CCUPSELLACCEPT';if(validateForm(this.form)){this.style.display = 'none';getElementById('standby').style.display = 'block';}else{return false;}"
+  });
+
+  $('#billMeLater').on('click', function(){
+    //  post message to navigate to next view in the parent
+    //onClick="getElementById('previous_page').value = 'CCUPSELLDECLINE'; " id="decline"
+    parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
+  });
+
+  $('#continue').on('click', function(){
+    //  post message to navigate to next view in the parent
+    parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
+  });
+
+  function getQueryParams(param) {
+    var queryStr = window.location.search.slice(1),
+    params = queryStr.split('&');
+    for(var i=0; i < params.length; i++){
+      var pair = params[i].split('=');
+      if(pair[0] === param) {
+        return pair[1];
+      }
+    }
+    return false;
+  }
+})();
+</script>
 </body>
 </html>
