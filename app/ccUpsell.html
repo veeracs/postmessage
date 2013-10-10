@@ -3,8 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <TMPL_INCLUDE NAME="omnitureobject.tmpl">
+  <head>  
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title><TMPL_IF TITLE><TMPL_VAR NAME="TITLE"><TMPL_ELSE><TMPL_VAR NAME="SITE_NAME"></TMPL_IF></title>
@@ -49,7 +48,8 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
       <script src="http://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
-    <TMPL_INCLUDE NAME="conde_scripts.tmpl">
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <TMPL_INCLUDE NAME="omnitureobject.tmpl">
   </head>
 <body>
 
@@ -178,6 +178,7 @@
     </div>
   </form>
 </div>
+<TMPL_INCLUDE NAME="conde_scripts.tmpl">
 <script src="https://stag-cnid.condenastdigital.com/client/vendor/hearst.js"></script>
 </body>
 </html>
