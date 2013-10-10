@@ -49,7 +49,6 @@
       <script src="http://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-    <TMPL_INCLUDE NAME="omnitureobject.tmpl">
   </head>
 <body>
 
@@ -57,7 +56,7 @@
   <div class="row-fluid span12">
     <div id="errorMessage" class="alert alert-error server-error cn-server-error hide">Invalid entry, please try again.</div>
   </div>
-  <form action="/subscribe/processSubscription" method="post" onSubmit="return validateFrm(this);" class="validate">
+  <form name="subscription" action="/subscribe/processSubscription" method="post">
     <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
     <TMPL_IF EXPR="host_ind >=1">
       <input type="hidden" name="offer_id" value="<TMPL_VAR NAME='OFFER_ID'>">
@@ -140,7 +139,7 @@
                 <div class="control-group">
                   <label for="">Credit Card Number</label>
                   <input name="credit_card_number" type="text" class="ccnumb" id="credit_card_number" maxlength="24" placeholder="Credit Card Number*">
-                  <div id="inline-error-credit" class="alert alert-error form-alert cn-alert-error"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
+                  <div id="inline-error-credit" class="alert alert-error form-alert cn-alert-error hide"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
                 </div>
               </div>
               <div class="row-fluid">
@@ -160,8 +159,8 @@
               </div>
               <div class="row-fluid">
                 <div class="control-group">
-                  <a id="submitPayment" class="btn btn-form btn-conde">Submit</a>
-                  <img src="/circulation/shared/images/omn_processing.gif" id="standby" border="0px" style="display:none;">
+                  <button id="submitPayment" class="btn btn-form btn-conde" type="button">Submit</button>
+                  <img class="hide" src="/circulation/shared/images/omn_processing.gif" id="standby">
                   <a id="billMeLater" class="lnk-conde" href="#">Bill me later</a>
                 </div>
               </div>
@@ -178,32 +177,64 @@
     </div>
   </form>
 </div>
-<TMPL_INCLUDE NAME="conde_scripts.tmpl">
 <!--script src="https://stag-cnid.condenastdigital.com/client/vendor/hearst.js"></script-->
 <script>
-  (function(){
+(function(){
+  
   var requestPayload = {next: true};
+
   $('#submitPayment').on('click', function(){
-    $("previous_page").val('CCUPSELLACCEPT');
-      $("form").submit(function(){
-        console.log("Submitted");
-      });
+    if(validForm()) {
+      console.log('Submitting form...');
+      $("#previous_page").val('CCUPSELLACCEPT');
+      $('#standby').show(); 
+      document.subscription.submit();
+    } else {
+      console.log('form validation failed!');
+      return false;
+    }
     //  send the domain as query param
     //  window.location = 'http://ist-cveera-6065:5000/ccUpsellConfirm.html?domain=http://IST-cveera-6065:9001/';
-    //onClick="getElementById('previous_page').value = 'CCUPSELLACCEPT';if(validateForm(this.form)){this.style.display = 'none';getElementById('standby').style.display = 'block';}else{return false;}"
   });
 
+  //  post message to navigate to next view in the parent
   $('#billMeLater').on('click', function(){
-    //  post message to navigate to next view in the parent
-    //onClick="getElementById('previous_page').value = 'CCUPSELLDECLINE'; " id="decline"
+    $('#previous_page').val('CCUPSELLDECLINE');
     parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
 
+  //  post message to navigate to next view in the parent
   $('#continue').on('click', function(){
-    //  post message to navigate to next view in the parent
     parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
 
+  //  validate the form inputs
+  function validForm(){
+    //  enable the button only when all fields are filled
+    //  validate radio input
+    //  initialize credt cards
+    var pt_id = [];
+        pt_id[1] = "MC", pt_id[2] = "Visa", pt_id[3] = "AmEx", pt_id[5] = "Disc";
+
+    var radioChecked = cardValid = false;
+    if ($('input[name=pt_id]:checked').val()) {
+      radioChecked = true;
+    } else {
+      console.log('radio button validation failed');
+    }
+    if(isValidCreditCard(pt_id[$( "input:radio[name=pt_id]:checked" ).val()], $('#credit_card_number').val())) {
+      cardValid = true;
+    } else {
+      console.log('credit card validation failed');
+    }
+    if(radioChecked && cardValid) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  //  get query params
   function getQueryParams(param) {
     var queryStr = window.location.search.slice(1),
     params = queryStr.split('&');
@@ -214,6 +245,40 @@
       }
     }
     return false;
+  }
+  //  validate credit card
+  function isValidCreditCard(type, ccnum) {
+    if (type == "Visa") {
+      // Visa: length 16, prefix 4, dashes optional.
+      var re = /^4\d{3}-?\d{4}-?\d{4}-?\d{4}$/;
+    } else if (type == "MC") {
+      // Mastercard: length 16, prefix 51-55, dashes optional.
+      var re = /^5[1-5]\d{2}-?\d{4}-?\d{4}-?\d{4}$/;
+    } else if (type == "Disc") {
+      // Discover: length 16, prefix 6011, dashes optional.
+      var re = /^6011-?\d{4}-?\d{4}-?\d{4}$/;
+    } else if (type == "AmEx") {
+      // American Express: length 15, prefix 34 or 37.
+      var re = /^3[4,7]\d{13}$/;
+    } else if (type == "Diners") {
+      // Diners: length 14, prefix 30, 36, or 38.
+      var re = /^3[0,6,8]\d{12}$/;
+    }
+    if (!re.test(ccnum)) return false;
+    // Remove all dashes for the checksum checks to eliminate negative numbers
+    ccnum = ccnum.split("-").join("");
+    // Checksum ("Mod 10")
+    // Add even digits in even length strings or odd digits in odd length strings.
+    var checksum = 0;
+    for (var i=(2-(ccnum.length % 2)); i<=ccnum.length; i+=2) {
+      checksum += parseInt(ccnum.charAt(i-1));
+    }
+    // Analyze odd digits in even length strings or even digits in odd length strings.
+    for (var i=(ccnum.length % 2) + 1; i<ccnum.length; i+=2) {
+      var digit = parseInt(ccnum.charAt(i-1)) * 2;
+      if (digit < 10) { checksum += digit; } else { checksum += (digit-9); }
+    }
+    if ((checksum % 10) == 0) return true; else return false;
   }
 })();
 </script>
