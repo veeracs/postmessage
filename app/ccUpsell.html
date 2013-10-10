@@ -135,11 +135,12 @@
                   </div>
                 </div>
               </div>
+              <div id="inline-error-credit-type" class="alert alert-error form-alert cn-alert-error hide"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card type!</div>
               <div class="row-fluid">
                 <div class="control-group">
                   <label for="">Credit Card Number</label>
                   <input name="credit_card_number" type="text" class="ccnumb" id="credit_card_number" maxlength="24" placeholder="Credit Card Number*">
-                  <div id="inline-error-credit" class="alert alert-error form-alert cn-alert-error hide"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
+                  <div id="inline-error-credit-card" class="alert alert-error form-alert cn-alert-error hide"><div class="cn-alert-error-arrow-up"></div>Not a valid credit card number!</div>
                 </div>
               </div>
               <div class="row-fluid">
@@ -213,24 +214,32 @@
     //  enable the button only when all fields are filled
     //  validate radio input
     //  initialize credt cards
-    var pt_id = [];
-        pt_id[1] = "MC", pt_id[2] = "Visa", pt_id[3] = "AmEx", pt_id[5] = "Disc";
+    try {
+      var pt_id = [];
+          pt_id[1] = "MC", pt_id[2] = "Visa", pt_id[3] = "AmEx", pt_id[5] = "Disc";
 
-    var radioChecked = cardValid = false;
-    if ($('input[name=pt_id]:checked').val()) {
-      radioChecked = true;
-    } else {
-      console.log('radio button validation failed');
-    }
-    if(isValidCreditCard(pt_id[$( "input:radio[name=pt_id]:checked" ).val()], $('#credit_card_number').val())) {
-      cardValid = true;
-    } else {
-      console.log('credit card validation failed');
-    }
-    if(radioChecked && cardValid) {
-      return true;
-    } else {
-      return false;
+      var radioChecked = cardValid = false;
+      if ($('input[name=pt_id]:checked').val()) {
+        $('#inline-error-credit-type').hide();
+        radioChecked = true;
+      } else {
+        console.log('card type validation failed');
+        $('#inline-error-credit-type').show();
+      }
+      if(isValidCreditCard(pt_id[$( "input:radio[name=pt_id]:checked" ).val()], $('#credit_card_number').val())) {
+        $('#inline-error-credit-card').hide();
+        cardValid = true;
+      } else {
+        console.log('credit card validation failed');
+        $('#inline-error-credit-card').show();
+      }
+      if(radioChecked && cardValid) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch(e) {
+      console.log(e.message);
     }
   }
   
