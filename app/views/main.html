@@ -84,6 +84,15 @@ button.close {
 	height: 100%;
 }
 }
+/* reduce height of the modal for larger desktops */
+@media only screen and (min-height : 1000px) {
+	.modal.fade.in {
+		top:15%;
+	}
+	.modal {
+		height: 70%;
+	}
+}
 </style>
 
 <a id="signIn" href="#myModal" role="button" class="btn launch" data-toggle="modal">Sign In/Register</a>
