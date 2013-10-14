@@ -54,7 +54,7 @@
 
 <div class="container-fluid">
   <div class="row-fluid span12">
-        <TMPL_IF error><div id="errorMessage" class="alert alert-error server-error cn-server-error hide"><TMPL_VAR NAME="error"></div></TMPL_IF>
+        <TMPL_IF error><div id="errorMessage" class="alert alert-error server-error cn-server-error"><TMPL_VAR NAME="error"></div></TMPL_IF>
   </div>
   <form name="subscription" action="/subscribe/processSubscription" method="post">
     <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
