@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<TMPL_INCLUDE NAME="omnitureobject.tmpl">
+	<title><TMPL_IF TITLE><TMPL_VAR NAME="TITLE"><TMPL_ELSE><TMPL_VAR NAME="SITE_NAME"></TMPL_IF></title>
+	<META NAME="description" CONTENT="<TMPL_VAR NAME="META_DESCRIPTION">">
+	<META NAME="keywords" CONTENT="<TMPL_VAR NAME="META_KEYWORDS">">
+<script type="text/javascript" src="/circulation/shared/scripts/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="/circulation/shared/scripts/popup.js"></script>
+<script language="javascript">
+var ECOMSUBS = window.ECOMSUBS || {};
+ECOMSUBS.page = function () {
+    function init (){
+        helperBoxes.init();
+    }
+
+    /**
+     * Tool Tips Widget
+     */
+    var helperBoxes = {
+        init: function() {
+            this.tipTriggers = jQuery('.tiplink');
+            this.tipTriggers.each(function(indx){
+                var parent = jQuery(this).parent()
+                var popEl = parent.find('.info-pop');
+                helperBoxes.prepTrigger(this,parent,indx);
+                helperBoxes.prepPop(popEl,parent,indx);
+            })
+        },
+        prepTrigger: function(tipLink,parent,indx) {
+            jQuery(tipLink)
+            .click(function(){
+                helperBoxes.showPop(tipLink,indx,parent);
+                return false;
+            })
+            .blur(function(){
+                helperBoxes.hidePop(indx,parent);
+            })
+
+        },
+        prepPop: function(popEl,parent,indx) {
+            var popEl = jQuery(popEl);
+            popEl.attr('id','infoPop'+indx);
+            popEl.appendTo('#offerWrapper');
+            popEl.bind("mouseleave",function(){
+                helperBoxes.hidePop(indx,parent);
+            })
+        },
+        showPop: function(tipLink,indx,parent) {
+            var trigger = jQuery(tipLink);
+            var tipPop = jQuery('#infoPop'+indx);
+            var parent = jQuery(parent);
+
+            if (tipPop.hasClass('paymeth')) {
+                var leftPos = trigger.offset().left + trigger.outerWidth() - (tipPop.outerWidth()/1.5) ;
+                var topPos = trigger.offset().top + trigger.outerHeight();
+            }
+            else if (tipPop.hasClass('securityCode')) {
+                var leftPos = trigger.offset().left + trigger.outerWidth() ;
+                var topPos = trigger.offset().top - (tipPop.outerHeight()/3);
+            }
+            else {
+                var leftPos = trigger.offset().left ;
+                var topPos = trigger.offset().top + trigger.outerHeight();
+            }
+            tipPop.css({display:'block', top: topPos+'px', left: leftPos+'px' });
+        },
+        hidePop: function(indx,parent){
+            var hide = setTimeout(function() {
+                jQuery('#infoPop'+indx).css('display','none');
+            }, 2000)
+        }
+
+    }
+     return {
+        init : init
+    };
+}();
+jQuery(document).ready(function(){
+    ECOMSUBS.page.init();
+});	
+</script>
+<link rel="stylesheet" type="text/css" href="/circulation/shared/styles/conde.css" />
+<link rel="stylesheet" type="text/css" href="/circulation/shared/styles/conde_ty_930.css" />
+<style>
+#offerWrapper
+{ width: 700px; }
+</style>
+<script src="/circulation/shared/scripts/mbox.js"></script>
+<script>	scTransObj = [<TMPL_LOOP NAME="transactions"> {"magazine":"<TMPL_VAR NAME="site_prefix"><TMPL_VAR NAME="TRANS_ID">" , "term":"<TMPL_VAR NAME="issues">" , "amount":"<TMPL_VAR NAME="amount">"},</TMPL_LOOP>];</script>
+
+</head>
+<body onLoad="keyparse();">
+<div id="offerWrapper">
+<div id="offerHeader"><img src="<TMPL_UNLESS EXPR="custom_text_6 eq ''">
+
+<TMPL_IF EXPR="substr(custom_text_6,0,4) eq 'http'">
+<TMPL_VAR EXPR="substr(custom_text_6,0)">
+</TMPL_IF>
+<TMPL_ELSE>/circulation/conde/shared/images/Gen_ConfPg_700x65.png
+</TMPL_UNLESS>" /></div>
+
+    <div id="offerBody">
+
+		<TMPL_IF NAME="error"><div id="error"><TMPL_VAR NAME="error"></div></TMPL_IF>
+		<div id="tyStepOne">
+			<div class="seperator"><img src="/circulation/conde/shared/images/hr_gray_double_ty.png" /></div>
+			<div id="tyHeader">
+				<p><a href="#" onclick="window.print();return false;"><img src="/circulation/conde/shared/images/button_print.png" border="0" align="right" /></a><h4>Thank you for your purchase</h4>
+<TMPL_LOOP NAME="TRANSACTIONS"><TMPL_IF __FIRST__><br>
+<TMPL_IF DIGITAL_ACCOUNT_NUMBER><TMPL_UNLESS EXPR="(FORMAT eq 'D') || (FORMAT eq 'B')"><TMPL_ELSE>
+<div style="float:left"> <b> Your Account Number: <TMPL_VAR NAME="DIGITAL_ACCOUNT_NUMBER"> </b><br><br>
+<a target="_blank" href="<TMPL_UNLESS EXPR="site_prefix eq 'vogue'">http://www.<TMPL_VAR NAME="SITE_PREFIX">.com/go/digitalaccess<TMPL_ELSE>https://w1.buysub.com/pubs/N3/VOG/digital_authentication_external.jsp?cds_mag_code=VOG</TMPL_UNLESS>">Learn how to access the <em><TMPL_VAR NAME="SITE"></em> digital edition with your account number.</a></div><br clear="all"><br></TMPL_UNLESS></TMPL_IF>
+</TMPL_IF>
+</TMPL_LOOP>
+
+				Any new print subscriptions will be to arrive in 4 to 6 weeks.  If you selected digital access as part of your subscription, you can access it on your tablet immediately!</p>
+			</div>
+				
+			<div id="itemizedSummary">
+				<h3>Your Purchase</h3>
+				<div class="hr2"></div>
+
+
+		<TMPL_IF EXPR="(trans_type_id == 10) || (trans_type_id == 11)">
+
+			<TMPL_LOOP NAME="transactions">
+
+				<div class="orderItemRow recipient">
+					<div class="orderItemDesc">
+						For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF>
+					</div>
+					<div class="orderItemIssues">Issues</div>
+					<div class="orderItemPrice">
+						Amount
+					</div>
+				</div>
+				<div class="orderItemRow">
+					<div class="orderItemDesc"><TMPL_VAR NAME="site_name"></div>
+					<div class="orderItemIssues"><TMPL_VAR NAME="issues"></div>
+					<div class="orderItemPrice">$<span class="price"><TMPL_VAR NAME="bill_amount"></span></div>
+				</div>
+
+			</TMPL_LOOP>
+		<TMPL_ELSE>
+			<TMPL_LOOP NAME="transactions">
+
+<TMPL_IF EXPR="trans_type_id == 1">
+			<TMPL_IF __first__>
+				<div class="orderItemRow recipient">
+					<div class="orderItemDesc">
+						For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF>
+					</div>
+					<div class="orderItemIssues">Issues</div>
+					<div class="orderItemPrice">
+						Amount
+					</div>
+				</div>
+			</TMPL_IF>
+				<div class="orderItemRow">
+					<div class="orderItemDesc"><TMPL_VAR NAME="site_name"></div>
+					<div class="orderItemIssues"><TMPL_VAR NAME="issues"></div>
+					<div class="orderItemPrice">$<span class="price"><TMPL_VAR NAME="amount"></span></div>
+				</div>
+<TMPL_ELSE>
+<div class="orderItemRow recipient">
+					<div class="orderItemDesc">
+						For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF>
+					</div>
+					<div class="orderItemIssues">Issues</div>
+					<div class="orderItemPrice">
+						Amount
+					</div>
+				</div>
+				<div class="orderItemRow">
+					<div class="orderItemDesc"><TMPL_VAR NAME="site_name"></div>
+					<div class="orderItemIssues"><TMPL_VAR NAME="issues"></div>
+					<div class="orderItemPrice">$<span class="price"><TMPL_VAR NAME="bill_amount"></span></div>
+				</div>
+</TMPL_IF>
+			</TMPL_LOOP>
+		</TMPL_IF>
+				<div class="hr" id="totalLine"></div>
+				<div class="orderItemRow" id="subTotalRow">
+					<div class="orderItemDesc itemization">Subtotal:</div>
+					<div class="orderItemIssues">&nbsp;</div>
+					<div class="orderItemPrice">
+						$<span id="subTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderSubTotal = 0.00;</TMPL_IF>
+						orderSubTotal += parseFloat(<TMPL_VAR NAME="amount">);<TMPL_IF __last__>document.write(orderSubTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span>
+					</div>
+				</div>
+
+				<div class="orderItemRow">
+					<div class="orderItemDesc itemization">Sales Tax:</div>
+					<div class="orderItemIssues">&nbsp;</div>
+					<div class="orderItemPrice">
+						$<span id="salesTax"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><script>var orderTaxTotal = <TMPL_VAR NAME="tax_amount">;</script><TMPL_VAR NAME="tax_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTaxTotal = 0.00;</TMPL_IF>
+						orderTaxTotal += parseFloat(<TMPL_VAR NAME="tax_amount">);<TMPL_IF __last__>document.write(orderTaxTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span>					</div>
+				</div>
+
+				<div id="orderTotal" class="orderItemRow">
+					<div id="orderTotalLabel" class="orderItemDesc itemization">Total purchase:</div>
+					<div class="orderItemIssues">&nbsp;</div>
+					<div class="orderItemPrice">
+						$<span id="grandTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="bill_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTotal = 0.00;</TMPL_IF>orderTotal += parseFloat(<TMPL_VAR NAME="bill_amount">);<TMPL_IF __last__>document.write(orderTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span>
+					</div>
+				</div>
+				<div class="orderItemRow">
+					<div class="orderItemDesc itemization">Payment method:</div>
+					<div class="orderItemIssues">&nbsp;</div>
+					<div class="orderItemPrice">
+						<TMPL_IF EXPR="TRANS1_PT_ID eq '1'">Mastercard</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '2'">Visa</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '3'">American Express</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '5'">Discover</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '6'">Bill Me Later</TMPL_IF>
+					</div>
+				</div>
+			</div>
+			<div class="shipping"><TMPL_IF NAME="custom_text_3"><TMPL_VAR NAME="custom_text_3"></TMPL_IF></div>
+            
+
+		</div>
+
+		<TMPL_IF NAME="SHOW_AUTO_BILLING">
+			<div class="autoRenewLink">
+				This order includes the <a href="#" class="tiplink">Subscriber's Automatic Renewal Feature</a>
+				<div class="info-pop"> 
+					<div class="inner"> 
+						<p>You won't be bothered with any renewal notices; instead, you will receive a clearly marked reminder about 60 days before your credit card is charged or a bill is sent.For full details, <a href="#autoRenew">see below</a></p> 
+					</div> 
+				</div>
+			</div>
+		</TMPL_IF>
+        <TMPL_IF NAME="CUSTOM_TEXT_4"><br /><div class="digitalPremium"><TMPL_VAR NAME="CUSTOM_TEXT_4"></div></TMPL_IF>
+
+		<div id="tyStepFive"<TMPL_IF EXPR="(site_prefix eq 'golfdigest') || (site_prefix eq 'vanityfair') || (site_prefix eq 'wired') || (site_prefix eq 'thenewyorker') || (site_prefix eq 'architecturaldigest') || (site_prefix eq 'vanityfair') || (site_prefix eq 'bonappetit') || (site_prefix eq 'brides')"><TMPL_ELSE><TMPL_IF EXPR="(CUSTOM_TEXT_2 eq 'override')"><TMPL_ELSE><TMPL_IF EXPR="(trans1_pt_id == 6) || (trans_type_id == 10) || (trans_type_id == 11)"> <TMPL_UNLESS EXPR="CUSTOM_TEXT_5 eq 'cc only'">style="display:none;"</TMPL_UNLESS></TMPL_IF></TMPL_IF></TMPL_IF>>
+		<div class="seperator" <TMPL_IF ADDITIONAL_OFFERS><TMPL_ELSE>style="display:none;"</TMPL_IF>><img src="/circulation/conde/shared/images/hr_gray_double_ty.png" /></div>
+        <!-- START of EMBEDDED OPTIONAL XSELL -->
+        <div id="ccXsells" <TMPL_IF ADDITIONAL_OFFERS><TMPL_ELSE>style="display:none;"</TMPL_IF>>
+			<h4>Purchase additional titles with just two clicks!</h4>
+        <TMPL_LOOP NAME="ADDITIONAL_OFFERS">
+<TMPL_IF EMBEDDED>
+<TMPL_ELSE>
+            <div id="tyXsell_<TMPL_VAR NAME=__counter__>" class="XsellItemCntr">
+                <div class="XsellItem">
+					<div class="XsellItemCover"><img src="<TMPL_VAR NAME="COVER_IMAGE_MD">" height="124" /></div>
+					<div class="XsellItemDetails">
+						<TMPL_IF offer_text><TMPL_VAR NAME="offer_text"><TMPL_ELSE><b><TMPL_VAR NAME="site_name"> magazine</b></TMPL_IF>
+						<div class="XsellItemButton"><span><TMPL_IF display_text><TMPL_VAR NAME="display_text"><TMPL_ELSE><TMPL_VAR NAME="ISSUES"> issues of <TMPL_VAR NAME="SITE_NAME"> for $<TMPL_VAR NAME="INTERNET_PRICE"></TMPL_IF></span>
+
+        <script type="text/javascript">
+
+        var popup<TMPL_VAR NAME="__counter__"> = new Popup();
+        popup<TMPL_VAR NAME="__counter__">.autoHide = false;
+        popup<TMPL_VAR NAME="__counter__">.content = '<div style="width:553px; height:404px;" class="xsellPopup"><div style="text-align:right; padding-right:10px; width:543px; padding-top:5px;"><a href="#" onclick="'+popup<TMPL_VAR NAME=__counter__>.ref+'.hide();return false;" id="popupClose_<TMPL_VAR NAME=__counter__>"><img src="/circulation/conde/shared/images/button_close.png" border="0" /></a></div><div style="width:533px; padding-left:20px;"><h3>Add Subscription</h3></div><div><div style="width:213px; float:left; padding:0px 20px;"><img src="<TMPL_VAR NAME=COVER_IMAGE_LG>" /></div><div style="width:240px; float:left;"><form action="" onSubmit="return false;" method="post"><input type="hidden" name="offer_id" value="<TMPL_VAR NAME="TRANS1_OFFER_ID">"><input type="hidden" name="parent_trans_id" value="<TMPL_VAR NAME="TRANS_ID">"><input type="hidden" name="offer_term" value="<TMPL_VAR NAME="OFFER_TERM">"><input type="hidden" name="previous_page" value="<TMPL_VAR NAME="PREVIOUS_PAGE">"><input type="hidden" name="source_code" value="<TMPL_VAR NAME="SOURCE_CODE">"><input type="hidden" name="referral_source" value="<TMPL_VAR NAME="SOURCE">"><input type="hidden" name="first_name" value="<TMPL_VAR NAME="TRANS1_FIRST_NAME">"><input type="hidden" name="last_name" value="<TMPL_VAR NAME="TRANS1_LAST_NAME">"><input type="hidden" name="address" value="<TMPL_VAR NAME="TRANS1_ADDRESS">"><input type="hidden" name="address2" value="<TMPL_VAR NAME="TRANS1_ADDRESS2">"><input type="hidden" name="city" value="<TMPL_VAR NAME="TRANS1_CITY">"><input type="hidden" name="state" value="<TMPL_VAR NAME="TRANS1_STATE">"><input type="hidden" name="postal_code" value="<TMPL_VAR NAME="TRANS1_POSTAL_CODE">"><input type="hidden" name="country_code" value="<TMPL_VAR NAME="TRANS1_COUNTRY_CODE">"><input type="hidden" name="email" value="<TMPL_VAR NAME="TRANS1_EMAIL">"><input type="hidden" name="ship_first_name" value="<TMPL_VAR NAME="TRANS1_SHIP_FIRST_NAME">"><input type="hidden" name="ship_last_name" value="<TMPL_VAR NAME="TRANS1_SHIP_LAST_NAME">"><input type="hidden" name="ship_address" value="<TMPL_VAR NAME="TRANS1_SHIP_ADDRESS">"><input type="hidden" name="ship_address2" value="<TMPL_VAR NAME="TRANS1_SHIP_ADDRESS2">"><input type="hidden" name="ship_city" value="<TMPL_VAR NAME="TRANS1_SHIP_CITY">"><input type="hidden" name="ship_state" value="<TMPL_VAR NAME="TRANS1_SHIP_STATE">"><input type="hidden" name="ship_postal_code" value="<TMPL_VAR NAME="TRANS1_SHIP_POSTAL_CODE">"><input type="hidden" name="ship_country_code" value="<TMPL_VAR NAME="TRANS1_SHIP_COUNTRY_CODE">"><input type="hidden" name="ship_email" value="<TMPL_VAR NAME="TRANS1_SHIP_EMAIL">"><input type="hidden" name="general_optin" value="<TMPL_VAR NAME="TRANS1_GENERAL_OPTIN">"><input type="hidden" name="pt_id" value="<TMPL_VAR NAME="TRANS1_PT_ID">"><input type="hidden" name="credit_card_exp_month" value="<TMPL_VAR NAME="TRANS1_CREDIT_CARD_EXP_MONTH">"><input type="hidden" name="credit_card_exp_year" value="<TMPL_VAR NAME="TRANS1_CREDIT_CARD_EXP_YEAR">"><input type="hidden" name="edialog_list_id" value="<TMPL_VAR NAME="EDIALOG_LIST_ID">">Subscribe to <TMPL_VAR NAME="SITE_NAME"> for a great price:<br /><input type="radio" checked /><TMPL_VAR NAME="ISSUES"> issues of <TMPL_VAR NAME="SITE_NAME"> for $<TMPL_VAR NAME="INTERNET_PRICE"><br /><br />Subscription will be mailed to:<br /><TMPL_VAR NAME="TRANS1_SHIP_FIRST_NAME"> <TMPL_VAR NAME="TRANS1_SHIP_LAST_NAME"><br /><TMPL_VAR NAME="TRANS1_SHIP_ADDRESS"><br /><TMPL_VAR NAME="TRANS1_SHIP_CITY">, <TMPL_VAR NAME="TRANS1_SHIP_STATE"> <TMPL_VAR NAME="TRANS1_SHIP_POSTAL_CODE"><br /><br /><img src="/circulation/conde/shared/images/button_buy_now.png" name="offer_accept" value="Place Order" onClick="this.style.visibility = \'hidden\';orderXsell(<TMPL_VAR NAME="__counter__">);" /></form></div></div></div>';
+        popup<TMPL_VAR NAME="__counter__">.width=553;
+        popup<TMPL_VAR NAME="__counter__">.height=404;
+        popup<TMPL_VAR NAME="__counter__">.style = {'background':'url(/circulation/conde/shared/images/background_xsell_popup.png) no-repeat'};
+        </script>
+        
+        <a href="#" onclick="popup<TMPL_VAR NAME="__counter__">.show();return false;"><img src="/circulation/conde/shared/images/button_add_xsell.png" border="0" style="padding-top:10px;" /></a>
+					</div>
+                </div>
+           </div>
+           </div>
+</TMPL_IF>
+        </TMPL_LOOP>
+        </div>
+
+	</div>
+
+        <!-- END of EMBEDDED OPTIONAL XSELL -->
+	<div class="seperator"><img src="/circulation/conde/shared/images/hr_gray_double_ty.png" /></div>
+	<div id="seeMore" <TMPL_IF ADDITIONAL_OFFERS><TMPL_ELSE>style="display:none;"</TMPL_IF>>
+		<a href="http://www.magazinestoresubscriptions.com/?source=circulesconfpage" target="_blank"><img src="/circulation/conde/shared/images/button_see_more.png" border="0" /></a>
+		<div class="hr"></div>
+	</div>
+
+	
+        <!-- START OF CONTINUOUS SERVICE -->
+        <TMPL_IF NAME="SHOW_AUTO_BILLING">  
+        <TMPL_INCLUDE NAME="autobill_copy.tmpl">
+        </TMPL_IF>
+        <!-- END OF CONTINUOUS SERVICE -->
+	</div>
+
+<TMPL_INCLUDE NAME="conde_footer.tmpl">
+</div>
+
+<SCRIPT type=text/javascript>
+<!--
+function popupform(ThisForm, pop_window)
+{
+if (! window.focus)return true;
+window.open('', pop_window, 'height=404,width=553,scrollbars=no,resizable=no');
+ThisForm.target=pop_window;
+return true;
+}
+//-->
+</SCRIPT>
+<!--START OF SCRIPT FOR HIDING ZEROS -->
+<SCRIPT type="text/javascript">
+<!--
+function rmvZeroes(dolAmt) { 
+document.write(dolAmt); 
+} 
+//-->
+</SCRIPT>
+<!--END OF SCRIPT FOR HIDING ZEROS -->
+<script language="javascript" type="text/javascript">
+
+var donAdd;
+var donAdd2;
+var donCity;
+var donState;
+var donZip;
+var csOffer = new Array(<tmpl_loop name=additional_offers>"<tmpl_var name=offer_term escape=JS>"<tmpl_unless __last__>, </tmpl_unless></tmpl_loop>);
+var csOfferID = new Array(<tmpl_loop name=additional_offers>"<tmpl_var name=offer_id escape=JS>"<tmpl_unless __last__>, </tmpl_unless></tmpl_loop>);
+var magTitle = new Array(<tmpl_loop name=additional_offers>"<tmpl_var name=site_name escape=JS>"<tmpl_unless __last__>, </tmpl_unless></tmpl_loop>);
+var magOfferText = new Array(<tmpl_loop name=additional_offers>"<tmpl_var name=display_text escape=JS>"<tmpl_unless __last__>, </tmpl_unless></tmpl_loop>);
+var magPrice = new Array(<tmpl_loop name=additional_offers>"<tmpl_var name=internet_price escape=JS>"<tmpl_unless __last__>, </tmpl_unless></tmpl_loop>);
+var magTerm = new Array(<tmpl_loop name=additional_offers>"<tmpl_var name=issues escape=JS>"<tmpl_unless __last__>, </tmpl_unless></tmpl_loop>);
+var magForeign = new Array(<tmpl_loop name=additional_offers>"<tmpl_var name=foreign_postage escape=JS>"<tmpl_unless __last__>, </tmpl_unless></tmpl_loop>);
+
+
+function orderXsell(i) {
+		var donAdd;
+		var donAdd2;
+		var donCity;
+		var donState;
+
+		var donZip;
+		var parentTransID = $('input[name=parent_trans_id]').val(); 
+		var offerTerm = csOffer[i-1];
+		var offerID = csOfferID[i-1];
+
+		var ptID = $('input[name=pt_id]').val();
+		var sourceCode = $('input[name=source_code]').val();
+		var sweepSource = $('input[name=sweep_source]').val();
+		var refSource = $('input[name=referral_source]').val();
+		var firstName = $('input[name=first_name]').val(); 
+		var lastName = $('input[name=last_name]').val(); 
+			if(!donAdd)
+			{
+				donAdd = $('input[name=address]').val();
+				donAdd2 = $('input[name=address2]').val();
+				donCity = $('input[name=city]').val();
+				donState = $('input[name=state]').val();
+				donZip = $('input[name=postal_code]').val();
+			}
+		var donCountry = $('input[name=country_code]').val();
+		var donEmail = $('input[name=email]').val();
+		var shipFirstName = $('input[name=ship_first_name]').val();
+		var shipLastName = $('input[name=ship_last_name]').val();
+		var shipAdd = $('input[name=ship_address]').val();
+		var shipAdd2 = $('input[name=ship_address2]').val();
+		var shipCity = $('input[name=ship_city]').val();
+		var shipState = $('input[name=ship_state]').val();
+		var shipZip = $('input[name=ship_postal_code]').val();
+		var shipCountry = $('input[name=ship_country_code]').val();
+		var shipEmail = $('input[name=ship_email]').val();
+		var genOptIn = $('input[name=general_optin]').val();
+		var ccMonth = $('input[name=credit_card_exp_month]').val();
+		var ccyear = $('input[name=credit_card_exp_year]').val();
+		var theOrderObj = {"offer_term":offerTerm, "offer_id":offerID, "pt_id":ptID, "parent_trans_id":parentTransID, "first_name":firstName, "last_name":lastName, "address":donAdd, "city":donCity, "state":donState, "country_code":donCountry, "postal_code":donZip, "email":donEmail, "source_code":sourceCode, "sweep_source":sweepSource, "referral_source":refSource, "address2":donAdd2, "general_optin":genOptIn, "ship_first_name":shipFirstName, "ship_last_name":shipLastName, "ship_address":shipAdd, "ship_address2":shipAdd2, "ship_city":shipCity, "ship_state":shipState, "ship_country_code":shipCountry, "ship_postal_code":shipZip, "ship_email":shipEmail, "credit_card_exp_month":ccMonth, "credit_card_exp_year":ccyear};
+			
+			$.ajax({
+				type: "POST",
+				url: "/api/circ/js/Transaction",  
+				data: theOrderObj,
+				error: function(){
+					alert("that didn't work.");
+
+				},
+				success: function(data){
+                    var orderStat = data;
+                    var orderStatObj = eval('(' + orderStat + ')');
+                    
+                    if(orderStatObj.order_success == ''){
+                    	alert(orderStatObj.order_failed);
+                    }
+                    else{
+						$("#popupClose_"+i).trigger('click');
+						$("#tyXsell_"+i).addClass("addedItem");
+						$("#tyXsell_"+i).html('<h3>' + magTitle[i-1] + ' has been added to your order</h3>');
+						$("#totalLine").show().before('<div class="orderItemRow added"><div class="orderItemDesc">ADDED: ' + magTitle[i-1] + '</div><div class="orderItemIssues">' +  magTerm[i-1] + '</div><div class="orderItemPrice">$<span class="price">' + magPrice[i-1] + '</span></div></div>');
+						var tot = 0;
+						var taxTot = parseFloat(orderTaxTotal.toFixed(2));
+                                                var impTax = parseFloat(orderStatObj.order_success[0].tax_amount[0]);
+						var newTaxTot = taxTot + impTax;
+						orderTaxTotal = newTaxTot;
+
+//alert("base offers: "+baseOffers);
+//alert("TAX RATE: "+taxRate);
+//alert("New Tax Tot: "+newTaxTot);
+
+
+						$("span.price").each(function(){
+						  tot += parseFloat($(this).html());
+						});
+						$("#subTotal").html(tot.toFixed(2));
+
+						$("#salesTax").html(newTaxTot.toFixed(2));
+						var newGrandTot = tot+newTaxTot;
+						$("#orderTotalLabel").html('Updated purchase:');
+						$("#grandTotal").html(newGrandTot.toFixed(2));
+                    }
+                    
+				}
+			});
+}
+</script>
+<TMPL_UNLESS EXPR="(previous_page eq 'CCUPSELLACCEPT') || (previous_page eq 'MTUSACCEPT') || (previous_page eq 'MTUSDECLINE') || (previous_page eq 'CCUPSELLDECLINE')">
+<TMPL_INCLUDE NAME="nativeremarketconfirmpixel.tmpl">
+</TMPL_UNLESS>
+<TMPL_INCLUDE NAME="omnitureconfirmation.tmpl">
+
+<div style="display:none;"><TMPL_VAR NAME="previous_page"></div>
+</body>
+
+</html>
