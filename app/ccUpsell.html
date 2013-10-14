@@ -57,6 +57,8 @@
     <div id="errorMessage" class="alert alert-error server-error cn-server-error hide">Invalid entry, please try again.</div>
   </div>
   <form name="subscription" action="/subscribe/processSubscription" method="post">
+    <TMPL_IF error><div class="error"><TMPL_VAR NAME="error"></div></TMPL_IF>
+    <TMPL_INCLUDE NAME="ssl.tmpl">
     <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
     <TMPL_IF EXPR="host_ind >=1">
       <input type="hidden" name="offer_id" value="<TMPL_VAR NAME='OFFER_ID'>">

@@ -15,6 +15,37 @@
     <![endif]-->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/bootstrap.css">
+    <style>
+      /* Spinner styles */
+      .loader {
+        position: absolute;
+        top:45%;
+        left:50%;
+        margin-left: -8px;
+        margin-top: -8px;
+        background-color: #000;
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        opacity: .8;
+        z-index: 1101;
+        img {
+          position: absolute;
+          top:16%;
+          left:16%;
+        }
+      }
+      .overlay-bg {
+        position: absolute;
+          top:50px;
+          left:0;
+          width:100%;
+          height:100%;
+          z-index:1100;
+          background: rgba(0,0,0,.62);
+          background: transparent -webkit-gradient(radial, center center, 10, center center, 600, from(rgba(0,0,0,.01)), to(rgba(0,0,0,.7)));
+      }
+    </style>
   </head>
   <body  ng-app="yoAngularApp">
     <div class="container" ng-view></div>
@@ -35,7 +66,7 @@
       var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent",
           eventer = window[eventMethod],
           messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-      // Listen to message from child window
+      //  Postmessage listener
       eventer(messageEvent,function(e) {
         //  alert(e.data);
         //  IE8 and below
@@ -49,8 +80,13 @@
             scrollTop: 0 // scrolls to the bottom
           }, 1);
         } else {
-          $('#myModal').modal('hide');
-          $('#signIn').text('Logout');  
+          //$('#myModal').modal('hide');
+          //$('#signIn').text('Logout');  
+        }
+        if(data.showModal) {
+          $('#loader-container').show();
+        } else {
+          $('#loader-container').hide();
         }
       },false);
     </script>
