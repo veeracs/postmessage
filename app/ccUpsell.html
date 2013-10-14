@@ -54,10 +54,9 @@
 
 <div class="container-fluid">
   <div class="row-fluid span12">
-    <div id="errorMessage" class="alert alert-error server-error cn-server-error hide">Invalid entry, please try again.</div>
+        <TMPL_IF error><div id="errorMessage" class="alert alert-error server-error cn-server-error hide"><TMPL_VAR NAME="error"></div></TMPL_IF>
   </div>
   <form name="subscription" action="/subscribe/processSubscription" method="post">
-    <TMPL_IF error><div class="error"><TMPL_VAR NAME="error"></div></TMPL_IF>
     <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
     <TMPL_IF EXPR="host_ind >=1">
       <input type="hidden" name="offer_id" value="<TMPL_VAR NAME='OFFER_ID'>">
