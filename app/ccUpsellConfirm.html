@@ -137,7 +137,7 @@
   });
   //  get query params
   function getQueryParams(param) {
-    var queryStr = window.location.search.slice(1),
+    var queryStr = getQueryString("<TMPL_VAR NAME='previous_page'>"),
         params = queryStr.split('&');
     for(var i=0; i < params.length; i++){
       var pair = params[i].split('=');
@@ -146,6 +146,9 @@
       }
     }
     return false;
+  }
+  function getQueryString(str) {
+    return str.split('?')[1];
   }
 })();
 </script>
