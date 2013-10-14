@@ -10,7 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="http://ci-cnid.conde.io/client/css/main.css">
+    <link rel="stylesheet" href="https://stag-cnid.condenastdigital.com/client/css/main.css">
     <style>
       .container-fluid {
         margin: 0 30px;
@@ -89,39 +89,41 @@
       <table class="table table-bordered">
         <tr>
           <td><b>Subtotal:</b></td>
-          <td>$34.00</td>
+          <td>$<span id="subTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderSubTotal = 0.00;</TMPL_IF>
+            orderSubTotal += parseFloat(<TMPL_VAR NAME="amount">);<TMPL_IF __last__>document.write(orderSubTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span></td>
         </tr>
         <tr>
           <td><b>Sales tax:</b></td>
-          <td>$3.34</td>
+          <td>$<span id="salesTax"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><script>var orderTaxTotal = <TMPL_VAR NAME="tax_amount">;</script><TMPL_VAR NAME="tax_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTaxTotal = 0.00;</TMPL_IF>
+            orderTaxTotal += parseFloat(<TMPL_VAR NAME="tax_amount">);<TMPL_IF __last__>document.write(orderTaxTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span></td>
         </tr>
         <tr>
           <td><b>Total purchase:</b></td>
-          <td>$37.34</td>
+          <td>$<span id="grandTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="bill_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTotal = 0.00;</TMPL_IF>orderTotal += parseFloat(<TMPL_VAR NAME="bill_amount">);<TMPL_IF __last__>document.write(orderTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span></td>
         </tr>
         <tr>
           <td><b>Payment method:</b></td>
-          <td>Credit</td>
+          <td><TMPL_IF EXPR="TRANS1_PT_ID eq '1'">Mastercard</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '2'">Visa</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '3'">American Express</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '5'">Discover</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '6'">Bill Me Later</TMPL_IF></td>
         </tr>
       </table>
+
+      <div class="shipping"><TMPL_IF NAME="custom_text_3"><TMPL_VAR NAME="custom_text_3"></TMPL_IF></div>
+
+      <TMPL_IF NAME="CUSTOM_TEXT_4"><br /><div class="digitalPremium"><TMPL_VAR NAME="CUSTOM_TEXT_4"></div></TMPL_IF>
+
       <div class="control-group">
         <a id="continue" class="btn btn-form btn-conde">Continue</a>
       </div>
       <div class="legal">
-        <p>Customer Service can be reached at www.com/customerservice or 1-800-405-8085.</p>
-        <p>Subscribers: If the Post Office alerts us that your magazine is undeliverable, we have no further obligation unless we receive a corrected address within one year. All orders subject to approval. By ordering, you agree not to resell any subscriptions purchased from this site.</p>
-        <p>Plus sales tax where applicable.</p>
-        <p>To learn more about our information practices and your privacy rights, click here</p>
-        <p>Use of this site constitutes acceptance of our User Agreement and Privacy Policy. Your CA Privacy Rights</p>
-        <p>Copyright © 2013 Condé Nast. All rights reserved</p>
+        <!-- START OF CONTINUOUS SERVICE -->
+        <TMPL_IF NAME="SHOW_AUTO_BILLING"><TMPL_INCLUDE NAME="autobill_copy.tmpl"></TMPL_IF>
+        <TMPL_INCLUDE NAME="conde_footer.tmpl">
       </div>
     </div>
   </div>
 </div>
 
-<script src="components/jquery/jquery.min.js"></script>
-<script src="components/bootstrap/js/modal.js"></script>
-<script src="scripts/main.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 
 <TMPL_UNLESS EXPR="(previous_page eq 'CCUPSELLACCEPT') || (previous_page eq 'MTUSACCEPT') || (previous_page eq 'MTUSDECLINE') || (previous_page eq 'CCUPSELLDECLINE')">
 <TMPL_INCLUDE NAME="nativeremarketconfirmpixel.tmpl">
