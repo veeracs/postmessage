@@ -58,7 +58,6 @@
   </div>
   <form name="subscription" action="/subscribe/processSubscription" method="post">
     <TMPL_IF error><div class="error"><TMPL_VAR NAME="error"></div></TMPL_IF>
-    <TMPL_INCLUDE NAME="ssl.tmpl">
     <!-- V2 needs the trans key to identify the orig trans, and the offer_id of the _container_ -->
     <TMPL_IF EXPR="host_ind >=1">
       <input type="hidden" name="offer_id" value="<TMPL_VAR NAME='OFFER_ID'>">
@@ -177,6 +176,7 @@
         <p>Subscribers: If the Post Office alerts us that your magazine is undeliverable, we have no further obligation unless we receive a corrected address within one year. All orders subject to approval. By ordering, you agree not to resell any subscriptions purchased from this site.</p>
         <p>Plus sales tax where applicable.</p>
       </div>
+      <TMPL_INCLUDE NAME="ssl.tmpl">
     </div>
   </form>
 </div>
