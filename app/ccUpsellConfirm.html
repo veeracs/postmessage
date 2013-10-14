@@ -42,13 +42,13 @@
       <h4>Thank you for your purchase</h4>
       <p>Any new print subscriptions will be to arrive in 4 to 6 weeks. If you selected digital access as part of your subscription, you can access it on your tablet immediately!</p>
       <h5>Order Details</h5>
-      <table class="table table-striped">
+      <table class="table table-striped table-bordered">
         <TMPL_IF EXPR="(trans_type_id == 10) || (trans_type_id == 11)">
           <TMPL_LOOP NAME="transactions">
             <tr>
-              <td>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></td>
-              <td>Issues</td>
-              <td>Amount</td>
+              <th>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></th>
+              <th>Issues</th>
+              <th>Amount</th>
             </tr>
             <tr>
               <td><TMPL_VAR NAME="site_name"></td>
@@ -61,9 +61,9 @@
             <TMPL_IF EXPR="trans_type_id == 1">
               <TMPL_IF __first__>
                 <tr>
-                  <td>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></td>
-                  <td>Issues</td>
-                  <td>Amount</td>
+                  <th>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></th>
+                  <th>Issues</th>
+                  <th>Amount</th>
                 </tr>
               </TMPL_IF>
               <tr>
@@ -73,9 +73,9 @@
               </tr>
             <TMPL_ELSE>
               <tr>
-                <td>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></td>
-                <td>Issues</td>
-                <td>Amount</td>
+                <th>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></th>
+                <th>Issues</th>
+                <th>Amount</th>
               </tr>
               <tr>
                 <td><TMPL_VAR NAME="site_name"></td>
@@ -85,25 +85,23 @@
             </TMPL_IF>
           </TMPL_LOOP>
         </TMPL_IF>
-      </table>
-      <table class="table table-bordered">
         <tr>
           <td><b>Subtotal:</b></td>
-          <td>$<span id="subTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderSubTotal = 0.00;</TMPL_IF>
+          <td colspan="2">$<span id="subTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderSubTotal = 0.00;</TMPL_IF>
             orderSubTotal += parseFloat(<TMPL_VAR NAME="amount">);<TMPL_IF __last__>document.write(orderSubTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span></td>
         </tr>
         <tr>
           <td><b>Sales tax:</b></td>
-          <td>$<span id="salesTax"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><script>var orderTaxTotal = <TMPL_VAR NAME="tax_amount">;</script><TMPL_VAR NAME="tax_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTaxTotal = 0.00;</TMPL_IF>
+          <td colspan="2">$<span id="salesTax"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><script>var orderTaxTotal = <TMPL_VAR NAME="tax_amount">;</script><TMPL_VAR NAME="tax_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTaxTotal = 0.00;</TMPL_IF>
             orderTaxTotal += parseFloat(<TMPL_VAR NAME="tax_amount">);<TMPL_IF __last__>document.write(orderTaxTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span></td>
         </tr>
         <tr>
           <td><b>Total purchase:</b></td>
-          <td>$<span id="grandTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="bill_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTotal = 0.00;</TMPL_IF>orderTotal += parseFloat(<TMPL_VAR NAME="bill_amount">);<TMPL_IF __last__>document.write(orderTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span></td>
+          <td colspan="2">$<span id="grandTotal"><TMPL_LOOP NAME="transactions"><TMPL_IF EXPR="__first__ && __last__"><TMPL_VAR NAME="bill_amount"><TMPL_ELSE><TMPL_IF __first__><script>var orderTotal = 0.00;</TMPL_IF>orderTotal += parseFloat(<TMPL_VAR NAME="bill_amount">);<TMPL_IF __last__>document.write(orderTotal.toFixed(2));</script></TMPL_IF></TMPL_IF></TMPL_LOOP></span></td>
         </tr>
         <tr>
           <td><b>Payment method:</b></td>
-          <td><TMPL_IF EXPR="TRANS1_PT_ID eq '1'">Mastercard</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '2'">Visa</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '3'">American Express</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '5'">Discover</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '6'">Bill Me Later</TMPL_IF></td>
+          <td colspan="2"><TMPL_IF EXPR="TRANS1_PT_ID eq '1'">Mastercard</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '2'">Visa</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '3'">American Express</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '5'">Discover</TMPL_IF><TMPL_IF EXPR="TRANS1_PT_ID eq '6'">Bill Me Later</TMPL_IF></td>
         </tr>
       </table>
 
