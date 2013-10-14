@@ -4,9 +4,10 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
   <head>
+    <TMPL_INCLUDE NAME="omnitureobject.tmpl">
+    <title><TMPL_IF TITLE><TMPL_VAR NAME="TITLE"><TMPL_ELSE><TMPL_VAR NAME="SITE_NAME"></TMPL_IF></title>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="http://ci-cnid.conde.io/client/css/main.css">
@@ -37,9 +38,54 @@
 <div class="container-fluid">
   <div class="row-fluid">
     <div class="span12">
+      <TMPL_IF NAME="error"><div id="error"><TMPL_VAR NAME="error"></div></TMPL_IF>
       <h4>Thank you for your purchase</h4>
       <p>Any new print subscriptions will be to arrive in 4 to 6 weeks. If you selected digital access as part of your subscription, you can access it on your tablet immediately!</p>
       <h5>Order Details</h5>
+      <table class="table table-striped">
+        <TMPL_IF EXPR="(trans_type_id == 10) || (trans_type_id == 11)">
+          <TMPL_LOOP NAME="transactions">
+            <tr>
+              <td>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></td>
+              <td>Issues</td>
+              <td>Amount</td>
+            </tr>
+            <tr>
+              <td><TMPL_VAR NAME="site_name"></td>
+              <td><TMPL_VAR NAME="issues"></td>
+              <td>$<span class="price"><TMPL_VAR NAME="bill_amount"></span></td>
+            </tr>
+          </TMPL_LOOP>
+        <TMPL_ELSE>
+          <TMPL_LOOP NAME="transactions">
+            <TMPL_IF EXPR="trans_type_id == 1">
+              <TMPL_IF __first__>
+                <tr>
+                  <td>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></td>
+                  <td>Issues</td>
+                  <td>Amount</td>
+                </tr>
+              </TMPL_IF>
+              <tr>
+                <td><TMPL_VAR NAME="site_name"></td>
+                <td><TMPL_VAR NAME="issues"></td>
+                <td>$<span class="price"><TMPL_VAR NAME="amount"></span></td>
+              </tr>
+            <TMPL_ELSE>
+              <tr>
+                <td>For <TMPL_VAR NAME="ship_first_name"> <TMPL_VAR NAME="ship_last_name"> at <TMPL_VAR NAME="ship_address"><TMPL_IF is_gift><!-- GIFT --></TMPL_IF></td>
+                <td>Issues</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td><TMPL_VAR NAME="site_name"></td>
+                <td><TMPL_VAR NAME="issues"></td>
+                <td>$<span class="price"><TMPL_VAR NAME="bill_amount"></span></td>
+              </tr>
+            </TMPL_IF>
+          </TMPL_LOOP>
+        </TMPL_IF>
+      </table>
       <table class="table table-bordered">
         <tr>
           <td><b>Subtotal:</b></td>
@@ -62,7 +108,7 @@
         <a id="continue" class="btn btn-form btn-conde">Continue</a>
       </div>
       <div class="legal">
-        <p>Customer Service can be reached at www..com/customerservice or 1-800-405-8085.</p>
+        <p>Customer Service can be reached at www.com/customerservice or 1-800-405-8085.</p>
         <p>Subscribers: If the Post Office alerts us that your magazine is undeliverable, we have no further obligation unless we receive a corrected address within one year. All orders subject to approval. By ordering, you agree not to resell any subscriptions purchased from this site.</p>
         <p>Plus sales tax where applicable.</p>
         <p>To learn more about our information practices and your privacy rights, click here</p>
@@ -72,8 +118,15 @@
     </div>
   </div>
 </div>
+
 <script src="components/jquery/jquery.min.js"></script>
 <script src="components/bootstrap/js/modal.js"></script>
 <script src="scripts/main.js"></script>
+
+<TMPL_UNLESS EXPR="(previous_page eq 'CCUPSELLACCEPT') || (previous_page eq 'MTUSACCEPT') || (previous_page eq 'MTUSDECLINE') || (previous_page eq 'CCUPSELLDECLINE')">
+<TMPL_INCLUDE NAME="nativeremarketconfirmpixel.tmpl">
+</TMPL_UNLESS>
+<TMPL_INCLUDE NAME="omnitureconfirmation.tmpl">
+<div style="display:none;"><TMPL_VAR NAME="previous_page"></div>
 </body>
 </html>
