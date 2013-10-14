@@ -29,8 +29,8 @@
       }
     </style>
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <script src="http://ci-cnid.conde.io/components/json2/json2.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
   </head>
 <body>
@@ -128,5 +128,26 @@
 </TMPL_UNLESS>
 <TMPL_INCLUDE NAME="omnitureconfirmation.tmpl">
 <div style="display:none;"><TMPL_VAR NAME="previous_page"></div>
+<script>
+(function(){
+  var requestPayload = {next: true};
+  //  post message to navigate to next view in the parent
+  $('#continue').on('click', function(){
+    parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
+  });
+  //  get query params
+  function getQueryParams(param) {
+    var queryStr = window.location.search.slice(1),
+        params = queryStr.split('&');
+    for(var i=0; i < params.length; i++){
+      var pair = params[i].split('=');
+      if(pair[0] === param) {
+        return pair[1];
+      }
+    }
+    return false;
+  }
+})();
+</script>
 </body>
 </html>

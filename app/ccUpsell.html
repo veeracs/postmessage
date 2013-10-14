@@ -45,8 +45,8 @@
       }
     </style>
     <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <script src="http://ci-cnid.conde.io/components/json2/json2.js"></script>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
     <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
   </head>
@@ -202,11 +202,6 @@
   //  post message to navigate to next view in the parent
   $('#billMeLater').on('click', function(){
     $('#previous_page').val('CCUPSELLDECLINE');
-    parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
-  });
-
-  //  post message to navigate to next view in the parent
-  $('#continue').on('click', function(){
     parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
 
