@@ -62,31 +62,33 @@
     <script src="scripts/controllers/main.js"></script>
     <!-- endbuild -->
     <script>
-      // Create IE + others compatible event handler
+      // create a compatible event handler
       var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent",
           eventer = window[eventMethod],
           messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-      //  Postmessage listener
+      //  postmessage listener
       eventer(messageEvent,function(e) {
-        //  alert(e.data);
-        //  IE8 and below
-        //  document.getElementById('message').innerHTML = JSON.parse(e.data);
-        //  IE9+ 
-        console.dir(JSON.parse(e.data));
-        var data = JSON.parse(e.data);
-        if (data.scrollTop) {
-          console.log("scroll to top");
-          $("#frameContainer").animate({
-            scrollTop: 0 // scrolls to the bottom
-          }, 1);
-        } else {
-          //$('#myModal').modal('hide');
-          //$('#signIn').text('Logout');  
-        }
-        if(data.showModal) {
-          $('#loader-container').show();
-        } else {
-          $('#loader-container').hide();
+        try {  
+          console.dir(JSON.parse(e.data));
+          var data = JSON.parse(e.data);
+          //  scroll to top
+          if (data.scrollTop) {
+            $("#frameContainer").animate({
+              scrollTop: 0 // scrolls to the bottom
+            }, 1);
+          }
+          //  show loader
+          if (data.showLoader) {
+            $('#loader-container').show();
+          } else {
+            $('#loader-container').hide();
+          }
+          //  log user in
+          if (data.authToken) {
+            console.log('log user in');
+          }
+        } catch(e){
+          console.log(e.message);
         }
       },false);
     </script>
