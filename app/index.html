@@ -86,6 +86,8 @@
           //  log user in
           if (data.authToken) {
             console.log('log user in');
+            $('#myModal').modal('hide');
+            $('#signIn').text('Logout'); 
           }
         } catch(e){
           console.log(e.message);
