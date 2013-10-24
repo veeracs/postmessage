@@ -207,6 +207,11 @@
     document.subscription.submit();
   });
 
+  //  post message to navigate to next view in the parent
+  $('#continue').on('click', function(){
+    parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
+  });
+
   //  validate the form inputs
   function validForm(){
     //  enable the button only when all fields are filled
