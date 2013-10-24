@@ -109,12 +109,12 @@
 
       <TMPL_IF NAME="CUSTOM_TEXT_4"><br /><div class="digitalPremium"><TMPL_VAR NAME="CUSTOM_TEXT_4"></div></TMPL_IF>
 
-      <div class="control-group text-right">
-        <a id="continue" class="btn btn-form btn-conde">Continue</a>
-      </div>
       <div class="legal">
         <!-- START OF CONTINUOUS SERVICE -->
-        <TMPL_IF NAME="SHOW_AUTO_BILLING"><TMPL_INCLUDE NAME="autobill_copy.tmpl"></TMPL_IF>
+        <div class="spacing-btm10"><TMPL_IF NAME="SHOW_AUTO_BILLING"><TMPL_INCLUDE NAME="autobill_copy.tmpl"></TMPL_IF></div>
+        <div class="control-group text-right">
+          <a id="continue" class="btn btn-form btn-conde">Continue</a>
+        </div>
         <TMPL_INCLUDE NAME="conde_footer.tmpl">
       </div>
     </div>
