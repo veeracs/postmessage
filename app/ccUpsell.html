@@ -163,6 +163,7 @@
                   <button id="submitPayment" class="btn btn-form btn-conde" type="button">Submit</button>
                   <img class="hide" src="/circulation/shared/images/omn_processing.gif" id="standby">
                   <a id="billMeLater" class="lnk-conde" href="#">Bill me later</a>
+                  <!--input onclick="getElementById('previous_page').value = 'CCUPSELLDECLINE';window.parent.CNP.ecom.closeiframe();" type="image" name="offer_decline" value="CCUPSELLDECLINE" src="/circulation/conde/shared/images/button_upsell_decline.png" border="0px" id="decline"-->
                 </div>
               </div>
             </div>
@@ -202,7 +203,8 @@
   //  post message to navigate to next view in the parent
   $('#billMeLater').on('click', function(){
     $('#previous_page').val('CCUPSELLDECLINE');
-    parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
+    //  parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
+    document.subscription.submit();
   });
 
   //  validate the form inputs
