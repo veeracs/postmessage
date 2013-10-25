@@ -71,7 +71,7 @@
         <input type="hidden" name="offer_term" value="<TMPL_VAR NAME='OFFER_TERM'>">
       </TMPL_LOOP>
     </TMPL_IF>
-    <input type="hidden" name="host_offer_id" value="<TMPL_VAR NAME='HOST_OFFER_ID'>">
+    <input type="hidden" name="host_offer_id" value="">
     <input type="hidden" name="referral_source" value="<TMPL_VAR NAME='SOURCE'>" />
     <input type="hidden" name="previous_page" value="<TMPL_VAR NAME='PREVIOUS_PAGE'>" id="previous_page">
     <input type="hidden" name="parent_trans_id" value="<TMPL_VAR NAME='TRANS1_TRANS_ID'>">
@@ -202,7 +202,8 @@
   //  post message to navigate to next view in the parent
   $('#billMeLater').on('click', function(){
     $('#previous_page').val('CCUPSELLDECLINE');
-    parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
+    document.subscription.submit();
+    //  parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
 
   //  post message to navigate to next view in the parent
