@@ -171,8 +171,7 @@
       return {
         init: function(obj){
           //  set iframe src
-          var iframeSrc = cnidEnv = appName = envPrefix = '',
-              envPrefixChar = obj.envPrefixChar || '-';
+          var iframeSrc = cnidEnv = appName = envPrefix = '';
           appName = obj.brand;
           hashVal = hashVal || 'prod';  //  default to prod, when no hash exits
           switch(hashVal) {
@@ -191,19 +190,19 @@
           console.log('cnidEnv: ' + cnidEnv);
           if(hashVal.indexOf('ist-')!=-1) {
             //  LOCAL
-            iframeSrc = cnidEnv + ':9001?domain=' + cnidEnv + ':5000/#/' + appName + '/login';  
+            iframeSrc = cnidEnv + ':9001?domain=' + cnidEnv + ':5000/#/' + appName + '/login';
           } else {
               if(!hashVal) {
-                //  default to PROD
+                //  default to whatever targetOrigin
                 envPrefix = '';
               } else {
                 //  for DEV, STAG
-                envPrefix = hashVal + envPrefixChar;
+                envPrefix = hashVal + '-';
               }
               //  DEV
-              iframeSrc = cnidEnv + '/client/index.html?domain=http://' + envPrefix + obj.targetOrigin + '/#/' + appName + '/login'; 
+              iframeSrc = cnidEnv + '/client/index.html?domain=http://' + envPrefix + obj.targetOrigin + '/#/' + appName + '/login';
           }
-          console.log('iframeSrc: ' + iframeSrc);      
+          console.log('iframeSrc: ' + iframeSrc);
           $('#' + obj.iframeId).attr('src', iframeSrc);
           //  setup posmesaging
           this.setupPostmessaging(obj);
@@ -231,7 +230,6 @@
       brand: 'com.condenet.glamour',
       regPath: 'auth',
       regSrc: 'CNEE_GLM',
-      envPrefixChar: '-',
       targetOrigin: 'cnee.condenastdigital.com/admin/postmessage.html',  //  origin receiving the postmessage
       postMessageCallback: function(data){
         //  called every time cnid tries to communicate to brand client
@@ -247,7 +245,8 @@
         } else {
           $('#loader-container').hide();
         }
-        if (data.authToken) { 
+        if (data.authToken) {
+          //  use token to get cookie information from the CNID server
           //  log user in
           $('#myModal').modal('hide');
           $('#signIn').text('Logout');
