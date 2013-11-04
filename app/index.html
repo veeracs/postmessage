@@ -164,17 +164,30 @@
     <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
     <script>
     var CNID = (function(){
+      var hostname = document.location.hostname;
       var hashVal = document.location.hash.split('#')[1],
           cnidDev = 'http://ci-cnid.conde.io',
           cnidStag = 'https://stag-cnid.condenastdigital.com',
           cnidProd = 'https://cnid.condenastdigital.com';
+
+      var hostEnv = (function(hostname){
+        if (hostname.indexOf('ist-')!=-1) {
+          return 'local';
+        } else if (hostname.indexOf('dev')!=-1) {
+          return 'dev';
+        } else if (hostname.indexOf('stag')!=-1) {
+          return 'stag';
+        } else {
+          return 'prod';
+        }
+      })(hostname);
+      console.log('hostEnv: ' + hostEnv);
       return {
         init: function(obj){
           //  set iframe src
           var iframeSrc = cnidEnv = appName = envPrefix = '';
           appName = obj.brand;
-          hashVal = hashVal || 'prod';  //  default to prod, when no hash exits
-          switch(hashVal) {
+          switch(hostEnv) {
             case 'dev':
               cnidEnv = cnidDev;
               break;
@@ -185,22 +198,16 @@
               cnidEnv = cnidProd;
               break;
             default:
-              cnidEnv = 'http://' + hashVal;
+              cnidEnv = 'http://' + hostname;
           }
           console.log('cnidEnv: ' + cnidEnv);
-          if(hashVal.indexOf('ist-')!=-1) {
+          if(hostEnv==='local') {
             //  LOCAL
             iframeSrc = cnidEnv + ':9001?domain=' + cnidEnv + ':5000/#/' + appName + '/login';
           } else {
-              if(!hashVal) {
-                //  default to whatever targetOrigin
-                envPrefix = '';
-              } else {
-                //  for DEV, STAG
-                envPrefix = hashVal + '-';
-              }
+              obj.targetOrigin = obj.targetOrigin || hostname;
               //  DEV
-              iframeSrc = cnidEnv + '/client/index.html?domain=http://' + envPrefix + obj.targetOrigin + '/#/' + appName + '/login';
+              iframeSrc = cnidEnv + '/client/index.html?domain=http://' + obj.targetOrigin + '/#/' + appName + '/login';
           }
           console.log('iframeSrc: ' + iframeSrc);
           $('#' + obj.iframeId).attr('src', iframeSrc);
