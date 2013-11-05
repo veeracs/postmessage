@@ -1,1 +1,0 @@
-JSON_CALLBACK({"name":"Super Hero"})
