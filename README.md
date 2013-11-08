@@ -6,9 +6,13 @@ The CNID client is served over https in an iframe. The brand site should launch 
 The following steps are necessary for integration,
 
 1. Include the CNID client CSS and Bootstrap 2.3.2 CSS in the HEAD section.
-3. Add markup for the bootstrap modal that houses iframe, the spinner and the buttons.
+3. Add markup for the bootstrap modal that houses iframe, the spinner and the buttons to launch the modal.
 4. Include the following JavaScript libraries at the bottom of the page - jquery ~1.10.2, bootstrap 2.3.2, cnid-client.
-5. Specify a couple of properties on the brand's global object for setting up postmessage callback handler and for initializing the CNID client.
-6. Setup click handlers on buttons to initialize and launch the CNID client (inside a modal) via commenting or auth flows.
+5. Specify a couple of properties on the brand's global object for setting up the postMessage callback handler and for initializing the CNID client. (see sample code for details)
+6. Setup click handlers on buttons that'll initialize and launch the CNID client (inside a modal) via commenting or auth flows.
 
-The postMessage callback handler will receive the following types of events.
+The postMessage callback handler will receive the following types of messages.
+
+1. scrollTop - scroll to the top of the page within the modal when an error message is displayed.
+2. showLoader - show loading status while the CNID client loads.
+3. authToken - Use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
