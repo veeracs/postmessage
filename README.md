@@ -17,7 +17,7 @@ CNID.init({
     brand: 'com.condenet.glamour',  //  brand name launching the CNID client, required
     regPath: regPath,               //  path to configure CNID client, required
     regSrc: 'CNEE_GLM',             //  registration source, required
-    targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  origin/host receiving the postmessage, optional if cnBrand is in the global scope
+    targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  origin/host receiving the postmessage, optional when postMessage callback handler is available in the global scope
     postMessageCallback: this.postMessageCallback  //  callback that'll receive postMessage events from CNID client
 });
 </code>
