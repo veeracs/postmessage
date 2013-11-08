@@ -7,10 +7,10 @@ The CNID client is served over https in an iframe. The brand site should launch 
 1. Include the CNID client CSS and Bootstrap 2.3.2 CSS in the HEAD section.
 2. Use following markup to launch the sign-in/commenting flow.
 
-<pre>
+<pre><code>
 <a id="authlocal" href="#myModal" role="button" class="btn" data-toggle="modal">Sign In/Register</a>
 <a id="commentinglocal" href="#myModal" role="button" class="btn" data-toggle="modal">Commenting</a>
-</pre>
+</code></pre>
 
 3. Include markup for the iframe and the spinner.
 4. Include the necessary JavaScript libraries - jquery ~1.10.2, bootstrap 2.3.2, cnid-client.
