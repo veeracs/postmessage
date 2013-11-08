@@ -8,21 +8,20 @@ The following steps are necessary for integration,
 1. Include the <b>CNID client</b> CSS and <b>Bootstrap 2.3.2</b> CSS in the HEAD section.
 3. Add markup for the bootstrap modal that houses iframe, the spinner and the buttons to launch the modal.
 4. Include the following JavaScript libraries at the bottom of the page - jquery ~1.10.2, bootstrap 2.3.2, cnid-client.
-5. Specify a couple of properties (<b>postMessageCallback</b> and <b>initializeCNID</b>) on the brand's global object for setting up the postMessage callback handler and for initializing the CNID client. (see sample code for details).
-	5.1. The CNID client is initialized in the following manner,
+5. Specify a couple of properties (<b>postMessageCallback</b> and <b>initializeCNID</b>) on the brand's global object for setting up the postMessage callback handler and for initializing the CNID client. (see sample code for details). The CNID client is initialized in the following manner,
 
-	<pre>
-		<code>
-			CNID.init({
-		        iframeId: 'cnidClient',         //  iframe hosting the CNID client, required
-		        brand: 'com.condenet.glamour',  //  brand name launching the CNID client, required
-		        regPath: regPath,               //  path to configure CNID client, required
-		        regSrc: 'CNEE_GLM',             //  registration source, required
-		        targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  origin/host receiving the postmessage, optional if cnBrand is in the global scope
-		        postMessageCallback: this.postMessageCallback  //  callback that'll receive postMessage events from CNID client
-		    });
-		</code>
-	</pre>
+<pre>
+<code>
+CNID.init({
+    iframeId: 'cnidClient',         //  iframe hosting the CNID client, required
+    brand: 'com.condenet.glamour',  //  brand name launching the CNID client, required
+    regPath: regPath,               //  path to configure CNID client, required
+    regSrc: 'CNEE_GLM',             //  registration source, required
+    targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  origin/host receiving the postmessage, optional if cnBrand is in the global scope
+    postMessageCallback: this.postMessageCallback  //  callback that'll receive postMessage events from CNID client
+});
+</code>
+</pre>
 
 6. Setup click handlers on buttons that'll initialize and launch the CNID client (inside a modal) via commenting or auth flows.
 
