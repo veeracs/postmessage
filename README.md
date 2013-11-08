@@ -13,6 +13,6 @@ The following steps are necessary for integration,
 
 The postMessage callback handler will receive the following types of messages.
 
-1. scrollTop - scroll to the top of the page within the modal when an error message is displayed.
-2. showLoader - show loading status while the CNID client loads.
-3. authToken - Use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
+1. <b>scrollTop</b> - scroll to the top of the page within the modal when an error message is displayed.
+2. <b>showLoader</b> - show loading status while the CNID client loads.
+3. <b>authToken</b> - Use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
