@@ -1,8 +1,9 @@
 Brand site Integration with CNID client
 =======================================
 
-The CNID client is served over https in an iframe. The brand site should launch the CNID client via a modal window. The following steps are necessary for integration,
+The CNID client is served over https in an iframe. The brand site should launch the CNID client via a modal window that houses the iframe. 
 
+The following steps are necessary for integration,
 
 1. Include the CNID client CSS and Bootstrap 2.3.2 CSS in the HEAD section.
 2. Use following markup to launch the sign-in/commenting flow.
