@@ -1,7 +1,7 @@
 Brand site Integration with CNID client
 =======================================
 
-The <b>CNID client</b> is served over https in an iframe. The brand site should launch the <b>CNID client<b> via a <b>responsive modal window</b> that houses the iframe. The <b>CNID client</b> will communicate with the brand client via postMessage HTML5 API.
+The <b>CNID client</b> should be served over https in an iframe. The brand site should launch the <b>CNID client<b> via a <b>responsive modal window</b> that houses the iframe. The <b>CNID client</b> will communicate with the brand client via postMessage HTML5 API.
 
 The following steps are necessary for integration,
 
