@@ -25,7 +25,7 @@ CNID.init({
 
 6. Setup click handlers on buttons that'll initialize and launch the CNID client (inside a modal) via commenting or auth flows.
 
-The postMessage callback handler will receive the following types of messages.
+The <b>postMessageCallback</b> handler will receive the following types of messages.
 
 1. <b>scrollTop</b> - scroll to the top of the page within the modal when an error message is displayed.
 2. <b>showLoader</b> - show loading status while the CNID client loads.
