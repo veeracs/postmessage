@@ -1,15 +1,21 @@
 Brand site Integration with CNID client
 =======================================
 
-The <b>CNID client</b> should be served over https in an iframe. The brand site should launch the <b>CNID client<b> via a <b>responsive modal window</b> that houses the iframe. The <b>CNID client</b> will communicate with the brand client via postMessage HTML5 API.
+The CNID client serves social sign-on, AMG sign-on and brand site registration. The <b>CNID client</b> should be served over https in an iframe within a modal dialog. The brand site should launch the <b>CNID client<b> via a <b>responsive modal dialog</b>. The <b>CNID client</b> will communicate with the brand site via postMessage HTML5 API.
 
-The following steps are necessary for integration,
+The following steps are necessary for the brand site integration with the CNID client,
 
 1. Include the <b>CNID client</b> CSS and <b>Bootstrap 2.3.2</b> CSS in the HEAD section.
+<pre>
+<code>
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="css/cnid-client.css">
+</code>
+</pre>
 2. <a href="https://github.com/veeracs/postmessage/blob/master/app/index.html" target="_self">Add markup</a> for the <b>bootstrap modal</b> (that houses iframe), <b>the spinner</b> and <b>the buttons</b> (to launch the modal).
 3. Include the following JavaScript libraries at the bottom of the page - <b>jquery ~1.10.2, bootstrap 2.3.2, cnid-client</b>.
 
-	3.1. cnid-client.js: This file creates a CNID property on the global object, if there isn't already one, setting its value to an object containing a init method. The init method determines the brand client's environment and sets up the iframe URL to point to a corresponding CNID environment. For instance, the brand's staging environment will point to CNID staging and all other brand environments will point to the CNID production evironment.
+	3.1. <b>cnid-client.js</b>: This file creates a CNID property on the global object, if there isn't already one, setting its value to an object containing a init method. The init method determines the brand client's environment and sets up the iframe URL to point to a corresponding CNID environment. For instance, the brand's staging environment will point to CNID staging and all other brand environments will point to the CNID production evironment.
 
 4. Specify a couple of properties (<b>postMessageCallback</b> and <b>initializeCNID</b>) on the brand's global object for setting up the postMessage callback handler and for initializing the CNID client. (see sample code for details). 
 5. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. The CNID client should be initialized in the following manner,
