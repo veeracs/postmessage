@@ -7,10 +7,8 @@ The following steps are necessary for the brand site integration with the CNID c
 
 1. Include the <b>CNID client</b> CSS and <b>Bootstrap 2.3.2</b> CSS in the HEAD section.
 <pre>
-	<code>
-		&lt;link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css"&gt;
-  		&lt;link rel="stylesheet" href="css/cnid-client.css"&gt;
-  	</code>
+<code>&lt;link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css"&gt;
+&lt;link rel="stylesheet" href="css/cnid-client.css"&gt;</code>
 </pre>
 2. <a href="https://github.com/veeracs/postmessage/blob/master/app/index.html" target="_self">Add markup</a> for the <b>bootstrap modal</b> (that houses iframe), <b>the spinner</b> and <b>the buttons</b> (to launch the modal).
 3. Include the following JavaScript libraries at the bottom of the page - <b>jquery ~1.10.2, bootstrap 2.3.2, cnid-client</b>.
