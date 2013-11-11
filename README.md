@@ -31,7 +31,7 @@ CNID.init({
 </code>
 </pre>
 
-Message data from the CNID client
+Messages/data from the CNID client
 ---------------------------------
 
 On the brand site, the <b>postMessageCallback</b> handler setup can expect to receive the following properties on the data object passed from the <b>CNID client</b>.
