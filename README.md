@@ -5,7 +5,7 @@ The CNID client serves social sign-on, AMG sign-on and brand site registration. 
 
 The following steps are necessary for the brand site integration with the CNID client,
 
-1. Include the <a href="https://github.com/veeracs/postmessage/blob/master/app/css/cnid-client.css" target="_self"><b>CNID client</b></a> CSS and <b>Bootstrap 2.3.2</b> CSS in the HEAD section.
+1. Include the <a href="https://github.com/veeracs/postmessage/blob/master/app/css/cnid-client.css" target="_self"><b>CNID client</b> CSS</a> and <b>Bootstrap 2.3.2</b> CSS in the HEAD section.
 <pre>
 <code>&lt;link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css"&gt;
 &lt;link rel="stylesheet" href="css/cnid-client.css"&gt;</code>
