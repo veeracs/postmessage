@@ -21,17 +21,20 @@ The following steps are necessary for the brand site integration with the CNID c
 <pre>
 <code>
 CNID.init({
-    iframeId: 'cnidClient',         //  iframe hosting the CNID client, required
-    brand: 'com.condenet.glamour',  //  brand name launching the CNID client, required
-    regPath: "auth",               	//  path to configure CNID client, required (only "auth" or "commenting")
-    regSrc: 'CNEE_GLM',             //  registration source, required
-    targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  origin/host receiving the postmessage, optional when postMessage callback handler is available in the global scope
-    postMessageCallback: callback  //  callback method that'll receive postMessage events from CNID client, required
+    iframeId: 'cnidClient',         //  required, id of iframe hosting the CNID client
+    brand: 'com.condenet.glamour',  //  required, brand name launching the CNID client
+    regPath: "auth",               	//  required, path to configure the CNID client, (possible values "auth" or "commenting")
+    regSrc: 'CNEE_GLM',             //  required, registration source
+    targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  optional when postMessage callback handler is available in the global scope, origin/host receiving the postmessage
+    postMessageCallback: callback  //  required, callback method that'll receive postMessage data from the CNID client
 });
 </code>
 </pre>
 
-The <b>postMessageCallback</b> handler will receive the following types of messages from <b>CNID client</b>.
+Message data from the CNID client
+---------------------------------
+
+On the brand site, the <b>postMessageCallback</b> handler setup can expect to receive the following properties on the data object passed from the <b>CNID client</b>.
 
 1. <b>scrollTop</b> - scroll to the top of the page within the modal when an error message is displayed.
 2. <b>showLoader</b> - show loading status while the CNID client loads.
