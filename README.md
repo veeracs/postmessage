@@ -31,26 +31,19 @@ The following steps are necessary for the brand site integration with the CNID c
 		//	callback that'll recieve data (authToken, etc.) from CNID
 	},
 	initializeCNID: function(){
-		CNID.init({...});
+		CNID.init({
+			iframeId: 'cnidClient',         //  required, id of iframe hosting the CNID client
+			brand: 'com.condenet.glamour',  //  required, brand name launching the CNID client
+			regPath: "auth",               	//  required, path to configure the CNID client, (possible values "auth" or "commenting")
+			regSrc: 'CNEE_GLM',             //  required, registration source
+			targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  optional when postMessage callback handler is available in the global scope, origin/host receiving the postmessage
+			postMessageCallback: this.postMessageCallback  //  required, callback method that'll receive postMessage data from the CNID client
+		});
 	}
 </code>
 </pre>
 
-5. The CNID client should be initialized in the following manner,
-<pre>
-<code>
-CNID.init({
-    iframeId: 'cnidClient',         //  required, id of iframe hosting the CNID client
-    brand: 'com.condenet.glamour',  //  required, brand name launching the CNID client
-    regPath: "auth",               	//  required, path to configure the CNID client, (possible values "auth" or "commenting")
-    regSrc: 'CNEE_GLM',             //  required, registration source
-    targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  optional when postMessage callback handler is available in the global scope, origin/host receiving the postmessage
-    postMessageCallback: postMessageCallback  //  required, callback method that'll receive postMessage data from the CNID client
-});
-</code>
-</pre>
-
-6. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. 
+5. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. 
 
 <pre>
 	<code>
