@@ -23,7 +23,18 @@ The following steps are necessary for the brand site integration with the CNID c
 	</code>
 	</pre>
 
-4. Specify a couple of properties (<b>postMessageCallback</b> and <b>initializeCNID</b>) on the brand's global object for setting up the postMessage callback handler and for initializing the CNID client. (see sample code for details). 
+4. Specify a couple of properties (<b>postMessageCallback</b> and <b>initializeCNID</b>) on the brand's global object for setting up the postMessage callback handler and for initializing the CNID client. (see sample code for details).
+<pre>
+	<code>
+		var cnBrand = cnBrand || {
+    	postMessageCallback: function (data){
+			//	callback that'll recieve data (authToken, etc.) from CNID
+		},
+		initializeCNID: function(){
+			CNID.init({...});
+		}
+	</code>
+</pre>
 5. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. The CNID client should be initialized in the following manner,
 
 <pre>
