@@ -80,6 +80,15 @@ button.close {
   }
 }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (min-height: 800px), only screen and (min-resolution: 192dpi) and (min-height: 800px) {
+  .modal {
+    height: 80%;
+  }
+  .modal.fade.in{
+    top:10%;
+  }
+}
+
 /* Spinner styles */
 .loader {
   position: fixed;
