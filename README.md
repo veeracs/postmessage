@@ -45,18 +45,18 @@ The following steps are necessary for the brand site integration with the CNID c
 
 5. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. 
 
-	<pre>
-		<code>
-		$('#signInRegisterBtn').on('click', function(){
-			//	launches CNID via auth flow
-		    cnBrand.initializeCNID('auth');
-		});
-		$('#commentingBtn').on('click', function(){
-			//	launches CNID via commenting flow
-		    cnBrand.initializeCNID('commenting');
-		});
-		</code>
-	</pre>
+<pre>
+	<code>
+	$('#signInRegisterBtn').on('click', function(){
+		//	launches CNID via auth flow
+	    cnBrand.initializeCNID('auth');
+	});
+	$('#commentingBtn').on('click', function(){
+		//	launches CNID via commenting flow
+	    cnBrand.initializeCNID('commenting');
+	});
+	</code>
+</pre>
 
 Messages/data from the CNID client
 ---------------------------------
