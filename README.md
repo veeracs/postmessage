@@ -63,6 +63,6 @@ Messages/data from the CNID client
 
 On the brand site, the <b>postMessageCallback</b> handler setup can expect to receive the following properties on the data object passed from the <b>CNID client</b>.
 
-1. <b>scrollTop</b> - scroll to the top of the page within the modal when an error message is displayed.
-2. <b>showLoader</b> - show loading status while the CNID client loads.
-3. <b>authToken</b> - Use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
+1. <b>scrollTop</b> - boolean, scroll to the top of the page within the modal when an error message is displayed.
+2. <b>showLoader</b> - boolean, show loading status while the CNID client loads.
+3. <b>authToken</b> - string, use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
