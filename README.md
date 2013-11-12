@@ -48,9 +48,11 @@ The following steps are necessary for the brand site integration with the CNID c
 <pre>
 	<code>
 	$('#signInRegisterBtn').on('click', function(){
+		//	launches CNID via auth flow
 	    cnBrand.initializeCNID('auth');
 	});
 	$('#commentingBtn').on('click', function(){
+		//	launches CNID via commenting flow
 	    cnBrand.initializeCNID('commenting');
 	});
 	</code>
