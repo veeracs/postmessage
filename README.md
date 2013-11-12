@@ -20,6 +20,9 @@ The following steps are necessary for the brand site integration with the CNID c
 
 <pre>
 <code>
+&lt;script src="https://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+&lt;script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script src="http://ci-cnid.conde.io/client/libs/cnid-client.js"&gt;&lt;/script&gt;
 CNID.init({
     iframeId: 'cnidClient',         //  required, id of iframe hosting the CNID client
     brand: 'com.condenet.glamour',  //  required, brand name launching the CNID client
