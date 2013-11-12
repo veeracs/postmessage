@@ -28,7 +28,7 @@ The following steps are necessary for the brand site integration with the CNID c
 <code>
 	var cnBrand = cnBrand || {
 	postMessageCallback: function (data){
-		//	callback that'll recieve data (authToken, etc.) from CNID
+		//	callback that'll recieve data (authToken, showLoader, scrollTop, etc.) from CNID
 	},
 	initializeCNID: function(){
 		CNID.init({
