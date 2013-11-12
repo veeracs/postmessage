@@ -15,14 +15,19 @@ The following steps are necessary for the brand site integration with the CNID c
 
 	3.1. <b>cnid-client.js</b>: This file creates a CNID property on the global object, if there isn't already one, setting its value to an object containing a init method. The init method determines the brand client's environment and sets up the iframe URL to point to a corresponding CNID environment. For instance, the brand's staging environment will point to CNID staging and all other brand environments will point to the CNID production evironment.
 
+	<pre>
+	<code>
+	&lt;script src="https://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+	&lt;script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://ci-cnid.conde.io/client/libs/cnid-client.js"&gt;&lt;/script&gt;
+	</code>
+	</pre>
+
 4. Specify a couple of properties (<b>postMessageCallback</b> and <b>initializeCNID</b>) on the brand's global object for setting up the postMessage callback handler and for initializing the CNID client. (see sample code for details). 
 5. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. The CNID client should be initialized in the following manner,
 
 <pre>
 <code>
-&lt;script src="https://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
-&lt;script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"&gt;&lt;/script&gt;
-&lt;script src="http://ci-cnid.conde.io/client/libs/cnid-client.js"&gt;&lt;/script&gt;
 CNID.init({
     iframeId: 'cnidClient',         //  required, id of iframe hosting the CNID client
     brand: 'com.condenet.glamour',  //  required, brand name launching the CNID client
