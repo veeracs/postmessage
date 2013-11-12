@@ -35,7 +35,8 @@ The following steps are necessary for the brand site integration with the CNID c
 		}
 	</code>
 </pre>
-5. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. The CNID client should be initialized in the following manner,
+
+5. The CNID client should be initialized in the following manner,
 
 <pre>
 <code>
@@ -48,6 +49,19 @@ CNID.init({
     postMessageCallback: postMessageCallback  //  required, callback method that'll receive postMessage data from the CNID client
 });
 </code>
+</pre>
+
+6. Setup click handlers on buttons that'll initialize the CNID client (via commenting or auth flows) and launch the responsive modal window. 
+
+<pre>
+	<code>
+	$('#authlocal').on('click', function(){
+	    cnBrand.initializeCNID('auth');
+	});
+	$('#commentinglocal').on('click', function(){
+	    cnBrand.initializeCNID('commenting');
+	});
+	</code>
 </pre>
 
 Messages/data from the CNID client
