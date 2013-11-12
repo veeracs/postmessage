@@ -26,7 +26,7 @@ CNID.init({
     regPath: "auth",               	//  required, path to configure the CNID client, (possible values "auth" or "commenting")
     regSrc: 'CNEE_GLM',             //  required, registration source
     targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  optional when postMessage callback handler is available in the global scope, origin/host receiving the postmessage
-    postMessageCallback: callback  //  required, callback method that'll receive postMessage data from the CNID client
+    postMessageCallback: postMessageCallback  //  required, callback method that'll receive postMessage data from the CNID client
 });
 </code>
 </pre>
