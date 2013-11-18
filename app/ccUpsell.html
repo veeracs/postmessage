@@ -186,6 +186,7 @@
   var requestPayload = {next: true};
 
   $('#submitPayment').on('click', function(){
+    console.log('submit clicked');
     if(validForm()) {
       console.log('Submitting form...');
       $("#previous_page").val('CCUPSELLACCEPT');
@@ -209,6 +210,7 @@
 
   //  post message to navigate to next view in the parent
   $('#continue').on('click', function(){
+    console.log('continue clicked');
     parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
 
