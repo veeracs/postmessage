@@ -130,14 +130,24 @@
 <div style="display:none;"><TMPL_VAR NAME="previous_page"></div>
 <script>
 (function(){
+console.log(document.referrer.split('?')[1]);
   var requestPayload = {next: true};
   //  post message to navigate to next view in the parent
   $('#continue').on('click', function(){
     parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
+  
   //  get query params
   function getQueryParams(param) {
-    return "<TMPL_VAR NAME='previous_page'>".split('?')[0];
+    var queryStr = document.referrer.split('?')[1],
+    params = queryStr.split('&');
+    for(var i=0; i < params.length; i++){
+      var pair = params[i].split('=');
+      if(pair[0] === param) {
+        return pair[1];
+      }
+    }
+    return false;
   }
   
 })();
