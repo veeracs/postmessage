@@ -113,7 +113,8 @@
         <!-- START OF CONTINUOUS SERVICE -->
         <div class="spacing-btm10"><TMPL_IF NAME="SHOW_AUTO_BILLING"><TMPL_INCLUDE NAME="autobill_copy.tmpl"></TMPL_IF></div>
         <div class="control-group text-right">
-          <a id="continue" class="btn btn-form btn-conde">Continue</a>
+          <!--a id="continue" class="btn btn-form btn-conde">Continue</a-->
+          <a id="continue" class="btn-form btn-conde">Continue</a>
         </div>
         <TMPL_INCLUDE NAME="conde_footer.tmpl">
       </div>
@@ -134,6 +135,7 @@ console.log(document.referrer.split('?')[1]);
   var requestPayload = {next: true};
   //  post message to navigate to next view in the parent
   $('#continue').on('click', function(){
+    console.log('continue clicked');
     parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
   
