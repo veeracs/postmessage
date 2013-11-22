@@ -66,3 +66,30 @@ On the brand site, the <b>postMessageCallback</b> handler setup can expect to re
 1. <b>scrollTop</b> - boolean, scroll to the top of the page within the modal when an error message is displayed.
 2. <b>showLoader</b> - boolean, show loading status while the CNID client loads.
 3. <b>authToken</b> - string, use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
+
+<pre>
+<code>
+postMessageCallback : function(data) {
+						// called every time cnid tries to communicate to brand client
+						if (data.scrollTop) {
+							// scroll to top
+							$("#frameContainer").animate({
+								scrollTop : 0
+							// scroll to top
+							}, 1);
+						}
+						if (data.showLoader) {
+							// show loader
+							$('#loader-container').show();
+						} else {
+							$('#loader-container').hide();
+						}
+						if (data.authToken) {
+							// use token to get cookie information from the CNID server
+							// log user in
+							$('#myModal').modal('hide');
+						}
+					}
+</code>
+</pre>
+
