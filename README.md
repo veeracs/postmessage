@@ -5,10 +5,11 @@ The CNID client serves social sign-on, AMG sign-on and brand site registration. 
 
 The following steps are necessary for the brand site integration with the CNID client,
 
-1. Include the <a href="https://github.com/veeracs/postmessage/blob/master/app/css/cnid-client.css" target="_self"><b>CNID client</b> CSS</a> and <b>Bootstrap 2.3.2</b> CSS in the HEAD section.
+1. Include the <b><a href="https://github.com/veeracs/postmessage/blob/master/app/index.html">Bootstrap 2.3.2</a></b> CSS in the HEAD section.
 <pre>
-<code>&lt;link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css"&gt;
-&lt;link rel="stylesheet" href="css/cnid-client.css"&gt;</code>
+<code>
+	&lt;link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css"&gt;
+</code>
 </pre>
 2. <a href="https://github.com/veeracs/postmessage/blob/master/app/index.html" target="_self">Add markup</a> for the <b>bootstrap modal</b> (that houses iframe), <b>the spinner</b> and <b>the buttons</b> (to launch the modal).
 3. Include the following JavaScript libraries at the bottom of the page - <b>jquery ~1.10.2, bootstrap 2.3.2, cnid-client</b>.
@@ -19,7 +20,7 @@ The following steps are necessary for the brand site integration with the CNID c
 	<code>
 	&lt;script src="https://code.jquery.com/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
 	&lt;script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"&gt;&lt;/script&gt;
-	&lt;script src="http://ci-cnid.conde.io/client/libs/cnid-client.js"&gt;&lt;/script&gt;
+	&lt;script src="https://cnid.condenastdigital.com/client/libs/cnid-client.js"&gt;&lt;/script&gt;
 	</code>
 	</pre>
 
