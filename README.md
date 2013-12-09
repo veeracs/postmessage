@@ -67,32 +67,38 @@ On the brand site, the <b>postMessageCallback</b> handler setup can expect to re
 1. <b>scrollTop</b> - boolean, scroll to the top of the page within the modal when an error message is displayed.
 2. <b>showLoader</b> - boolean, show loading status while the CNID client loads.
 3. <b>authToken</b> - string, use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
-4. <b>errorMessage</b> - string, show error message in a popover for mobile devices. The CNID server determines the device type, so no device type detection will be needed on the brand client, the brand client just shows the error message in a popover when it receives the data via postMessage event from CNID client.
+4. <b>alertMessage</b> - string, show alert message in a popover for mobile devices. The CNID server determines the device type, so no device type detection will be needed on the brand client, the brand client just shows the alert message in a popover when it receives the data via postMessage event from CNID client.
 
 The following property should be defined on the brand's global object, and should be available on any page that uses the CNID client.
 <pre>
 <code>
+// called every time cnid tries to communicate to brand client
 postMessageCallback : function(data) {
-						// called every time cnid tries to communicate to brand client
-						if (data.scrollTop) {
-							// scroll to top
-							$("#frameContainer").animate({
-								scrollTop : 0
-							// scroll to top
-							}, 1);
-						}
-						if (data.showLoader) {
-							// show loader
-							$('#loader-container').show();
-						} else {
-							$('#loader-container').hide();
-						}
-						if (data.authToken) {
-							// use token to get cookie information from the CNID server
-							// log user in
-							$('#myModal').modal('hide');
-						}
-					}
+	// scroll to top
+	if (data.scrollTop) {
+		$("#frameContainer").animate({
+			scrollTop : 0
+		// scroll to top
+		}, 1);
+	}
+	//	show loader
+	if (data.showLoader) {
+		$('#loader-container').show();
+	} else {
+		$('#loader-container').hide();
+	}
+	//	got auth token
+	if (data.authToken) {
+		// use token to get cookie information from the CNID server
+		// log user in
+		$('#myModal').modal('hide');
+	}
+	//	got alert message
+	if (data.alertMessage) {
+		$('#alert-txt').html(data.alertMessage);
+		$('#alerts-container').show();
+	}
+}
 </code>
 </pre>
 
