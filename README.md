@@ -105,4 +105,4 @@ postMessageCallback : function(data) {
 Cross-browser issues
 --------------------
 
-1. To fix content overlflow issues on iOS Safari, the CNID client communicates with the brand client via postmessages scrollTop, showLoader and errorMessage.
+1. To fix content overlflow issues on iOS Safari, the CNID client communicates with the brand client via postmessages scrollTop, showLoader and alertMessage.
