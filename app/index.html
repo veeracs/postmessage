@@ -10,10 +10,10 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <!--[if lt IE 9]>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.1.0/es5-shim.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/2.1.0/es5-shim.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
 <![endif]-->
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap.min.css">
 <style>
 body {
   margin: 20px;
@@ -202,7 +202,7 @@ button.close {
       <div id="alerts-container" class="hide">
         <div class="overlay-bg"></div>
         <div class="alert-message alert alert-error text-center">
-          <p id="alert-txt">Blanditiis, praesentium, aliquam ipsum molestiae consequatur sed nemo dolor quia rerum dolores ducimus magni unde?</p>
+          <p id="alert-txt"></p>
           <button id="okay-btn" type="button" class="btn btn-form btn-conde">Okay</button>
         </div>
       </div>
@@ -216,9 +216,9 @@ button.close {
     </style>
   <![endif]-->
 </div>
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-<script src="https://stag-cnid.condenastdigital.com/client/libs/cnid-client.js"></script>
+<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//stag-cnid.condenastdigital.com/client/libs/cnid-client.js"></script>
 <script>
   //  Initialize the CNID client
   console.log('hostEnv: ' + CNID.hostEnv);
@@ -246,6 +246,7 @@ button.close {
       }
       //  show alert message
       if (data.alertMessage) {
+        console.log('alertMessage: ' + data.alertMessage);
         $('#alert-txt').html(data.alertMessage);
         $('#alerts-container').show();
       }
