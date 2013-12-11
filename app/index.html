@@ -221,7 +221,7 @@ button.close {
 <script src="//stag-cnid.condenastdigital.com/client/libs/cnid-client.js"></script>
 <script>
   //  Initialize the CNID client
-  console.log('hostEnv: ' + CNID.hostEnv);
+  //  console.log('hostEnv: ' + CNID.hostEnv);
 
   var cnBrand = cnBrand || {
     postMessageCallback: function (data){ //  called every time cnid tries to communicate to brand client
@@ -246,7 +246,7 @@ button.close {
       }
       //  show alert message
       if (data.alertMessage) {
-        console.log('alertMessage: ' + data.alertMessage);
+        //  console.log('alertMessage: ' + data.alertMessage);
         $('#alert-txt').html(data.alertMessage);
         $('#alerts-container').show();
       }
@@ -260,11 +260,11 @@ button.close {
         targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  origin/host receiving the postmessage, optional if cnBrand is in the global scope
         postMessageCallback: this.postMessageCallback  //  callback that'll receive postMessage events from CNID client
       });
-      $('myModal').modal();    
+      $('#myModal').modal();
     }
   }
-  
-  // alert popover button  
+
+  // alert popover button
   $('#okay-btn').on('click', function(){
      $('#alerts-container').hide();
   });
@@ -276,7 +276,7 @@ button.close {
   $('#commentinglocal').on('click', function(){
     cnBrand.initializeCNID('commenting');
   });
-  
+
   //  DEV Env buttons
   $('#authdev').on('click', function(){
     cnBrand.initializeCNID('auth');
