@@ -37,7 +37,6 @@ The following steps are necessary for the brand site integration with the CNID c
 			brand: 'com.condenet.glamour',  //  required, brand name launching the CNID client
 			regPath: regPath,               	//  required, path to configure the CNID client, (possible values "auth" or "commenting")
 			regSrc: 'CNEE_GLM',             //  required, registration source
-			targetOrigin: 'dev-cnee.condenastdigital.com/admin/postmessage.html',  //  optional when postMessage callback handler is available in the global scope, origin/host receiving the postmessage
 			postMessageCallback: this.postMessageCallback  //  required, callback method that'll receive postMessage data from the CNID client
 		});
 	}
