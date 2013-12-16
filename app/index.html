@@ -248,7 +248,7 @@ button.close {
       if (data.alert) {
         //  console.log('alertMessage: ' + data.alertMessage);
         $('#alert-txt').html(data.alert.message);
-        $("#alert-message")[((data.alert.type==="error")? "add":"remove") + "Class"]("alert-error");
+        $("#alert-message")[((data.alert.type==="error")?"add":"remove")+"Class"]("alert-error");
         $('#alerts-container').show();
       }
     },
