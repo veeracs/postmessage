@@ -98,13 +98,7 @@ postMessageCallback : function(data) {
 		//	set the alert message
 		$('#alert-txt').html(data.alert.message);
 		//	set the css class on the message container
-		if(data.alert.type==="error") {
-		  $("#alert-message").addClass("alert-error");
-		  $("#alert-message").removeClass("alert-success");
-		} else {
-		  $("#alert-message").addClass("alert-success");
-		  $("#alert-message").removeClass("alert-error");
-		}
+		$("#alert-message")[((data.alert.type==="error")? "add":"remove") + "Class"]("alert-error");
 		$('#alerts-container').show();
 	}
 }
