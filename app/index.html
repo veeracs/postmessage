@@ -201,7 +201,7 @@ button.close {
       <!-- alerts overlay -->
       <div id="alerts-container" class="hide">
         <div class="overlay-bg"></div>
-        <div class="alert-message alert alert-error text-center">
+        <div id="alert-message" class="alert-message alert alert-error text-center">
           <p id="alert-txt"></p>
           <button id="okay-btn" type="button" class="btn btn-form btn-conde">Okay</button>
         </div>
@@ -245,9 +245,17 @@ button.close {
         $('#auth' + CNID.hostEnv).text('Logout');
       }
       //  show alert message
-      if (data.alertMessage) {
+      if (data.alert) {
         //  console.log('alertMessage: ' + data.alertMessage);
-        $('#alert-txt').html(data.alertMessage);
+        $('#alert-txt').html(data.alert.message);
+        if(data.alert.type==="error") {
+          $("#alert-message").addClass("alert-error");
+          $("#alert-message").removeClass("alert-success");
+        } else {
+          $("#alert-message").addClass("alert-success");
+          $("#alert-message").removeClass("alert-error");
+        }
+        $('#alert-txt').css(data.alert.message);
         $('#alerts-container').show();
       }
     },
