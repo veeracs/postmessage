@@ -67,7 +67,7 @@ On the brand site, the <b>postMessageCallback</b> handler setup can expect to re
 2. <b>showLoader</b> - boolean, show loading status while the CNID client loads.
 3. <b>authToken</b> - string, use authToken to close the modal window and fetch cookie information from the CNID server and log the user in.
 4. <b>rememberMe</b> - boolean, true if user checks 'Remember Me' during login.
-5. <b>alertMessage</b> - string, show alert message in a popover for mobile devices. The CNID server determines the device type, so no device type detection will be needed on the brand client, the brand client just shows the alert message in a popover when it receives the data via postMessage event from CNID client.
+5. <b>alert</b> - object (with properties 'message' and 'type'), show alert message in a popover for mobile devices. The CNID server determines the device type, so no device type detection will be needed on the brand client, the brand client just shows the alert message in a popover when it receives the data via postMessage event from CNID client.
 
 The following property should be defined on the brand's global object, and should be available on any page that uses the CNID client.
 <pre>
@@ -93,9 +93,18 @@ postMessageCallback : function(data) {
 		// log user in
 		$('#myModal').modal('hide');
 	}
-	//	got alert message
-	if (data.alertMessage) {
-		$('#alert-txt').html(data.alertMessage);
+	//  show alert message
+	if (data.alert) {
+		//	set the alert message
+		$('#alert-txt').html(data.alert.message);
+		//	set the css class on the message container
+		if(data.alert.type==="error") {
+		  $("#alert-message").addClass("alert-error");
+		  $("#alert-message").removeClass("alert-success");
+		} else {
+		  $("#alert-message").addClass("alert-success");
+		  $("#alert-message").removeClass("alert-error");
+		}
 		$('#alerts-container').show();
 	}
 }
