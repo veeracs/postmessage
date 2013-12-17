@@ -30,7 +30,6 @@
     </style>
     <!--[if lt IE 9]>
       <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-      <script src="https://ci-cnid.conde.io/components/json2/json2.js"></script>
     <![endif]-->
   </head>
 <body>
@@ -123,7 +122,7 @@
   </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
 <TMPL_UNLESS EXPR="(previous_page eq 'CCUPSELLACCEPT') || (previous_page eq 'MTUSACCEPT') || (previous_page eq 'MTUSDECLINE') || (previous_page eq 'CCUPSELLDECLINE')">
 <TMPL_INCLUDE NAME="nativeremarketconfirmpixel.tmpl">
@@ -137,6 +136,7 @@ console.log(document.referrer.split('?')[1]);
   //  post message to navigate to next view in the parent
   $('#continue').on('click', function(){
     console.log('continue clicked');
+    console.log('%cdomain: ' + getQueryParams('domain'), "color:red");
     parent.postMessage(JSON.stringify(requestPayload), getQueryParams('domain'));
   });
   
