@@ -1,6 +1,3 @@
-body {
-  margin: 20px;
-}
 .modal {
   border-radius: 0;
   height: 80%;
@@ -108,13 +105,49 @@ button.close {
   top:16%;
   left:16%;
 }
+
 .overlay-bg {
   position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:1100;
-    background: rgba(0,0,0,.62);
-    background: transparent -webkit-gradient(radial, center center, 10, center center, 600, from(rgba(0,0,0,.01)), to(rgba(0,0,0,.7)));
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1100;
+  background: rgba(0,0,0,.50);
+  /*background: transparent -webkit-gradient(radial, center center, 10, center center, 600, from(rgba(0,0,0,.01)), to(rgba(0,0,0,.7)));*/
+}
+
+/* Alert messages */
+.alert-message {
+  position: fixed;
+  left: 30%;
+  top: 40%;
+  /*transform: translate(-50%, -50%);*/
+  width: 40%;
+  padding: 10px;
+  text-align: center;
+  z-index: 1101;
+}
+
+.btn-conde, .btn-conde:hover, .btn-conde:active {
+  line-height: 30px;
+  background-image: none;
+  background-color: #EB2E7E;
+  color: #fff;
+  border: 1px solid #EB2E7E;
+  border-radius: 0;
+  text-shadow:none;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 4px 30px;
+}
+
+@media only screen 
+and (min-width : 310px) 
+and (max-width : 568px) {
+  /* alert messages */
+  .alert-message {
+    width: 80%;
+    left: 7%;
+  }
 }
