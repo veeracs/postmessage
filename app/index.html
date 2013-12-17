@@ -139,11 +139,12 @@ button.close {
 
 /* Alert messages */
 .alert-message {
-  position: absolute;
-  left: 21%;
-  top: 25%;
+  position: fixed;
+  left: 30%;
+  top: 40%;
   /*transform: translate(-50%, -50%);*/
-  width: 50%;
+  width: 40%;
+  padding: 10px;
   text-align: center;
   z-index: 1101;
 }
@@ -159,6 +160,16 @@ button.close {
   text-transform: uppercase;
   text-decoration: none;
   padding: 4px 30px;
+}
+
+@media only screen 
+and (min-width : 310px) 
+and (max-width : 568px) {
+  /* alert messages */
+  .alert-message {
+    width: 80%;
+    left: 7%;
+  }
 }
 </style>
 </head>
