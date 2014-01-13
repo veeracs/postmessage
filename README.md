@@ -31,6 +31,9 @@ The following steps are necessary for the brand site integration with the CNID c
 	postMessageCallback: function (data){
 		//	callback that'll recieve data (authToken, showLoader, scrollTop, etc.) from CNID
 	},
+	hostEnv: function(){
+		//	determine brand environment and return a String ('prod', 'stag', 'dev', 'local')
+	},
 	initializeCNID: function(regPath){
 		CNID.init({
 			iframeId: 'cnidClient',         //  required, id of iframe hosting the CNID client
@@ -38,6 +41,7 @@ The following steps are necessary for the brand site integration with the CNID c
 			regPath: regPath,               	//  required, path to configure the CNID client, (possible values "auth" or "commenting")
 			regSrc: 'CNEE_GLM',             //  required, registration source
 			postMessageCallback: this.postMessageCallback  //  required, callback method that'll receive postMessage data from the CNID client
+			hostEnv: this.hostEnv			//	optional, function callback that determines brand environment (possible return values are 'prod', 'stag', 'dev', 'local')
 		});
 	}
 </code>
