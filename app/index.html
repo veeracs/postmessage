@@ -304,6 +304,14 @@ and (max-width : 568px) {
   $('#commentingprod').on('click', function(){
     cnBrand.initializeCNID('commenting');
   });
+
+  $('#myModal').on('show hide', function(e){
+    if (e.type === 'hide') {
+        CNID.postMessage({
+            hideModal: true
+        });
+    }
+  });
 </script>
 </body>
 </html>

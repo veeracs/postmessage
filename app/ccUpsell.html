@@ -203,6 +203,11 @@
   $('#billMeLater').on('click', function(){
     $('#previous_page').val('CCUPSELLDECLINE');
     //  $('#host_offer_id').val('');
+    $("input[name='pt_id']").prop('checked', false);
+    $('#credit_card_number').val('');
+    $('#credit_card_exp_month').val('01');
+    $('#credit_card_exp_year').val('14');
+
     $('#standby').show(); 
     document.subscription.submit();
     return false;
