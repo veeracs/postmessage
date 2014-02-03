@@ -206,7 +206,7 @@ and (max-width : 568px) {
       <div id="loader-container" class="hide">
         <div class="overlay-bg"></div>
         <div class="loader">
-          <img src="https://stag-cnid.condenastdigital.com/client/assets/img/spinner.gif">
+          <img src="https://cnid.condenastdigital.com/client/assets/img/spinner.gif">
         </div>
       </div>
       <!-- alerts overlay -->
@@ -229,6 +229,8 @@ and (max-width : 568px) {
 
   var cnBrand = cnBrand || {
     postMessageCallback: function (data){ //  called every time cnid tries to communicate to brand client
+      console.log('%cmessage event callback fires on the brand side', 'color:green');
+      console.log(data);
       //  scroll to top
       if (data.scrollTop) {
         $("#frameContainer").animate({
@@ -245,6 +247,7 @@ and (max-width : 568px) {
       if (data.authToken) {
         //  use token to get cookie information from the CNID server
         //  log user in
+        console.log('%cBrand gets authToken from CNID!', 'color:red');
         $('#myModal').modal('hide');
         $('#auth' + CNID.hostEnv).text('Logout');
       }
